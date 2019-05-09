@@ -20,20 +20,15 @@ export default class FlashcardsList extends React.Component {
       firstText: this.state.firstText,
       secondText: this.state.secondText
     };
-console.log(flashcard);
-    axios.post(`http://localhost:4000/api/flashcards`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: {
-      JSON.stringify({ flashcard })
-      }
-    })
+    
+    axios
+      .post(`http://localhost:4000/api/flashcards`, flashcard)
       .then(res => {
         console.log(res);
         console.log(res.data);
       });
   };
+
   componentDidMount() {
     axios.get(`http://localhost:4000/api/flashcards`).then(res => {
       const flashcards = res.data;
