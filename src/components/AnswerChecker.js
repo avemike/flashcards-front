@@ -42,7 +42,6 @@ export default class AnswerChecker extends React.Component {
                 <textarea rows="2" cols="44"
                     onChange={e => this.setState({userAnswer:e.target.value})}></textarea>
                 <button onClick={this.checkUserAnswer}>Sprawdź</button>
-                <button>Dalej</button>
             </div>
         );
     }
