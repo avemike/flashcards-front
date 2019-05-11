@@ -1,7 +1,5 @@
 import React from 'react';
-import Textarea from './Textarea';
-import Button from './Button';
-import { Flashcards } from './App';
+import AnswerChecker from './AnswerChecker';
 
 const imgLogo = {
     src: process.env.PUBLIC_URL + '/img/icon-left-font-monochrome-black.png',
@@ -9,10 +7,6 @@ const imgLogo = {
 };
 
 export default class Flashcard extends React.Component {
-    onButtonClick = event => {
-        document.getElementById("properValue").textContent = this.props.flashcard.answer;
-    };
-
     render() {
         return(
             <div className="card">
@@ -21,9 +15,7 @@ export default class Flashcard extends React.Component {
                     <img src={imgLogo.src} alt={imgLogo.alt} />
                 </div>
                 <p>{this.props.flashcard.name}</p>
-                <Textarea />
-                <div id="properValue"></div>
-                <Button name="Sprawdź" onClick={this.onButtonClick} />
+                <AnswerChecker onChange={this.onTextareaChange} name="Sprawdź" flashcard = {this.props.flashcard}/>
             </div>
 
         );

@@ -48,7 +48,14 @@ body {
     width: 100px;
 }
 
-textarea {
+.textButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.textButtonContainer textarea {
     border: 2px solid black;
     font-size: 20px;
     padding: 5px;
@@ -57,7 +64,7 @@ textarea {
     font-family: 'Lato', sans-serif;
 }
 
-button {
+.textButtonContainer button {
     background-color: #2cc26f;
     color: #e8f4f0;
     border: none;
