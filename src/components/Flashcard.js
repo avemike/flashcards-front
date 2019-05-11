@@ -47,7 +47,7 @@ export default class Flashcard extends React.Component {
     }
 
     render() {
-        if (this.state.status == 200) {
+        if (this.state.status === 200) {
             return(
                 <div className="card">
                     <div className="wrap">
@@ -60,7 +60,7 @@ export default class Flashcard extends React.Component {
                 </div>
 
             );
-        } else if (this.state.status == 204) {
+        } else if (this.state.status === 204) {
             return(<div><LearningSummary /> </div>);
         }
     }

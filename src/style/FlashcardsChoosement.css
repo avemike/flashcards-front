@@ -1,0 +1,57 @@
+form {
+    font-size: 15px;
+}
+
+.inputContainer {
+    margin: 0 10px 10px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.inputContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.inputContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.inputContainer input:checked ~ .checkmark {
+  background-color: #2cc26f;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.inputContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.inputContainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

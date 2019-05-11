@@ -15,7 +15,6 @@ export default class LearningSummary extends React.Component {
     getCorrectAnswer = () => {
         axios.get("http://localhost:4000/learning/learningResults")
         .then(res => {
-            const correctAnswer = res.data.correctAnswer;
             this.setState({
                 correctAnswer: res.data.correctAnswer,
                 badAnswers: res.data.badAnswers
