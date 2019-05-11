@@ -24,16 +24,23 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 620px;
+    min-height: 388px;
     
 }
 
-.card p{
+.card h2{
     font-family: 'Lato', sans-serif;
     color: #04291D;
     font-size: 40px;
     font-weight: 900;
     text-align: center;
     margin: 0 0 20px;
+}
+
+p {
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .wrap {
@@ -44,7 +51,7 @@ body {
     width: 100%;
 }
 
-.wrap img{
+img{
     width: 100px;
 }
 
