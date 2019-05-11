@@ -15,7 +15,7 @@ export default class Flashcard extends React.Component {
                     <img src={imgLogo.src} alt={imgLogo.alt} />
                 </div>
                 <p>{this.props.flashcard.name}</p>
-                <AnswerChecker onChange={this.onTextareaChange} name="Sprawdź" flashcard = {this.props.flashcard}/>
+                <AnswerChecker onChange={this.onTextareaChange} flashcard = {this.props.flashcard}/>
             </div>
 
         );

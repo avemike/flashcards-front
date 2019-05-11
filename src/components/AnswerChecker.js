@@ -41,7 +41,8 @@ export default class AnswerChecker extends React.Component {
                 <div id={this.properValueId}></div>
                 <textarea rows="2" cols="44"
                     onChange={e => this.setState({userAnswer:e.target.value})}></textarea>
-                <button onClick={this.checkUserAnswer}>{this.props.name}</button>
+                <button onClick={this.checkUserAnswer}>Sprawdź</button>
+                <button>Dalej</button>
             </div>
         );
     }
