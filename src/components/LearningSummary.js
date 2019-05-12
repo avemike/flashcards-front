@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import { imgLogo } from './Flashcard.js'
 import FlashcardsChoosement from './FlashcardsChoosement';
+import "../style/learning-module.css";
+import { imgLogo } from './Flashcard.js'
 
 export default class LearningSummary extends React.Component {
     constructor(props) {

@@ -1,5 +1,6 @@
-import "../style/AnswerChecker.css";
 import React from 'react';
+import "../style/learning-module.css";
+import "../style/AnswerChecker.css";
 
 export default class AnswerChecker extends React.Component {
     state = {
@@ -33,12 +34,12 @@ export default class AnswerChecker extends React.Component {
     }
 
     setTextFrameStyle = (className) => {
-        document.getElementById("textButtonContainer").getElementsByTagName("textarea")[0].className = className;
+        document.getElementById(this.props.textButtonContainerId).getElementsByTagName("textarea")[0].className = className;
     }
 
     render() {
         return (
-            <div id="textButtonContainer">
+            <div id={this.props.textButtonContainerId}>
                 <div id={this.props.properValueId}>{this.state.properValue}</div>
                 <textarea rows="2" cols="44"
                     onChange={e => this.setState({userAnswer:e.target.value})}></textarea>

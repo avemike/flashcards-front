@@ -12,3 +12,19 @@
 .wrongAnswer {
     border-color: red !important;
 }
+
+#textButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#textButtonContainer textarea {
+    border: 2px solid black;
+    font-size: 20px;
+    padding: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Flashcard from './Flashcard';
+import "../style/learning-module.css";
 import "../style/FlashcardsChoosement.css";
 import { imgLogo } from './Flashcard.js'
 

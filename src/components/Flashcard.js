@@ -1,8 +1,8 @@
-import "../style/Flashcard.css";
 import React from 'react';
 import axios from 'axios';
 import AnswerChecker from './AnswerChecker';
 import LearningSummary from './LearningSummary';
+import "../style/learning-module.css";
 
  export const imgLogo = {
     src: process.env.PUBLIC_URL + '/img/icon-left-font-monochrome-black.png',
@@ -21,6 +21,7 @@ export default class Flashcard extends React.Component {
     }
 
     properValueId = "properValue";
+    textButtonContainerId = "textButtonContainer"
 
     nextFlashcard = () => {
         this.hideAnswer();
@@ -30,6 +31,9 @@ export default class Flashcard extends React.Component {
 
     hideAnswer = () => {
         document.getElementById(this.properValueId).hidden = true;
+        const answerTexArea = document.getElementById(this.textButtonContainerId).getElementsByTagName("textarea")[0];
+        answerTexArea.className = "";
+        answerTexArea.value = "";
     }
 
     updateCurrentFlashcard = () => {
@@ -69,7 +73,7 @@ export default class Flashcard extends React.Component {
                         <img src={imgLogo.src} alt={imgLogo.alt} />
                     </div>
                     <h2>{this.state.flashcard.name}</h2>
-                    <AnswerChecker flashcard = {this.state.flashcard} properValueId = {this.properValueId}/>
+                    <AnswerChecker flashcard = {this.state.flashcard} properValueId = {this.properValueId} textButtonContainerId = {this.textButtonContainerId} />
                     <button onClick={this.nextFlashcard}>Dalej</button>
                 </div>
 
