@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Flashcard from './Fiche/Flashcard';
-import AddFlashcardModal from './Fiche/AddFlashcardModal';
-import AddFlashcard from './Fiche/AddFlashcard';
+import Flashcard from './Flashcard/Flashcard';
+import AddFlashcardModal from './Flashcard/AddFlashcardModal';
+import AddFlashcard from './Flashcard/AddFlashcard';
 
 export default class Content extends Component {
     constructor(props) {
@@ -11,22 +11,22 @@ export default class Content extends Component {
             flashcards: [{
                 category: 'Jedzenie',
                 word: 'Lody',
-                translatedWord: 'blowjobs'
+                translatedWord: 'Ice Cream'
             },
             {
-                category: 'Jedzenie1',
-                word: 'Lody',
-                translatedWord: 'blowjobs'
+                category: 'Jedzenie',
+                word: 'Jabłko',
+                translatedWord: 'Apple'
             },
             {
-                category: 'Jedzenie2',
-                word: 'Lody',
-                translatedWord: 'blowjobs'
+                category: 'Sprzęt',
+                word: 'Komputer',
+                translatedWord: 'Computer'
             },
             {
-                category: 'Jedzenie3',
-                word: 'Lody',
-                translatedWord: 'blowjobs'
+                category: 'Motoryzacja',
+                word: 'Samochód',
+                translatedWord: 'Car'
             }
             ]
         }
@@ -60,6 +60,7 @@ export default class Content extends Component {
                 <AddFlashcardModal handleAddFlashcard={this.handleAddFlashcard} />
 
             </div>
+
         )
     }
 }
