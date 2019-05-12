@@ -2,14 +2,12 @@ import "../style/AnswerChecker.css";
 import React from 'react';
 
 export default class AnswerChecker extends React.Component {
-    properValueId = "properValue";
-
     state = {
-        userAnswer: ""
+        userAnswer: "",
+        properValue: ""
     };
 
     checkUserAnswer = (event) => {
-        document.getElementById(this.properValueId).innerHTML = this.props.flashcard.answer;
         this.isAnswerCorrect() ? this.setAnswerCorrect() : this.setAnswerIncorrect();
 
         console.log("Correct answers " + this.props.flashcard.correctAnswer);
@@ -29,6 +27,9 @@ export default class AnswerChecker extends React.Component {
     setAnswerIncorrect = () => {
         this.props.flashcard.badAnswers += 1;
         this.setTextFrameStyle("wrongAnswer");
+        this.setState({properValue: this.props.flashcard.answer});
+        document.getElementById(this.props.properValueId).hidden = false;
+
     }
 
     setTextFrameStyle = (className) => {
@@ -38,7 +39,7 @@ export default class AnswerChecker extends React.Component {
     render() {
         return (
             <div id="textButtonContainer">
-                <div id={this.properValueId}></div>
+                <div id={this.props.properValueId}>{this.state.properValue}</div>
                 <textarea rows="2" cols="44"
                     onChange={e => this.setState({userAnswer:e.target.value})}></textarea>
                 <button onClick={this.checkUserAnswer}>Sprawdź</button>

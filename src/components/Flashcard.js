@@ -10,7 +10,6 @@ import LearningSummary from './LearningSummary';
 };
 
 export default class Flashcard extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -21,11 +20,16 @@ export default class Flashcard extends React.Component {
         this.getNextFlashcard();
     }
 
-//    var gotFlashcardsNbr = 0;
+    properValueId = "properValue";
 
     nextFlashcard = () => {
+        this.hideAnswer();
         this.updateCurrentFlashcard();
         this.getNextFlashcard(); //in future - cookie as parameter
+    }
+
+    hideAnswer = () => {
+        document.getElementById(this.properValueId).hidden = true;
     }
 
     updateCurrentFlashcard = () => {
@@ -55,7 +59,7 @@ export default class Flashcard extends React.Component {
     }
 
     render() {
-        if (this.state.status === 204 || this.gotFlashcardsNbr == this.props.flashcardsAmount)
+        if (this.state.status === 204 || this.gotFlashcardsNbr === this.props.flashcardsAmount)
             return(<LearningSummary />);
         if (this.state.status === 200)
             return(
@@ -65,7 +69,7 @@ export default class Flashcard extends React.Component {
                         <img src={imgLogo.src} alt={imgLogo.alt} />
                     </div>
                     <h2>{this.state.flashcard.name}</h2>
-                    <AnswerChecker onChange={this.onTextareaChange} flashcard = {this.state.flashcard}/>
+                    <AnswerChecker flashcard = {this.state.flashcard} properValueId = {this.properValueId}/>
                     <button onClick={this.nextFlashcard}>Dalej</button>
                 </div>
 
