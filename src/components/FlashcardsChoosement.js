@@ -11,7 +11,7 @@ export default class FlashcardsChoosement extends React.Component {
            categories: [],
            flashcardsNbr: {
                 max: 1,
-                current: 1
+                flashcardAmount: 1
            },
            gotoFlashcards: false
         };
@@ -32,7 +32,7 @@ export default class FlashcardsChoosement extends React.Component {
         const flashcardsSize = this.state.flashcardsNbr.max;
         this.setState({flashcardsNbr: {
                 max: flashcardsSize,
-                current: e.target.value
+                flashcardAmount: e.target.value
             }
         });
     }
@@ -53,9 +53,15 @@ export default class FlashcardsChoosement extends React.Component {
         const setFlashcardNbr = parseInt(totalFlashcardsNbr / 2);
         this.setState({flashcardsNbr: {
                 max: totalFlashcardsNbr,
-                current: setFlashcardNbr
+                flashcardAmount: setFlashcardNbr
             }
         });
+    }
+
+    listTickedCategories = () => {
+        return this.state.categories
+            .filter((category) => category.isTicked)
+            .map((category) => category.name);
     }
 
     startLearning = () => {
@@ -79,17 +85,20 @@ export default class FlashcardsChoosement extends React.Component {
                 <form>
                     {renderedCategories}
                 </form>
-                <p>Wybierz liczbę fiszek do nauki</p>
+                <p>Wybierz liczbę fiszek do nauki:</p>
 
                 <div className="slidecontainer">
+                  <div>{this.state.flashcardsNbr.flashcardAmount}</div>   
                   <input type="range" className="slider" min="1" max={this.state.flashcardsNbr.max}
-                    defaultValue={this.state.flashcardsNbr.current}
+                    defaultValue={this.state.flashcardsNbr.flashcardAmount}
                     onChange={this.flashcardNbrChoose}/>
-                  <div>{this.state.flashcardsNbr.current}</div>
                 </div>
 
                 <button onClick={this.startLearning}>Dalej</button>
             </div>);
-        else return(<Flashcard />);
+        else return(<Flashcard
+            flashcardsAmount = {this.state.flashcardsNbr.flashcardAmount}
+            categories = {this.listTickedCategories()}
+        />);
     }
 }

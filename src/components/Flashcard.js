@@ -10,14 +10,18 @@ import LearningSummary from './LearningSummary';
 };
 
 export default class Flashcard extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             status: 200,
             flashcard: {}
         };
+        this.gotFlashcardsNbr = -1;
         this.getNextFlashcard();
     }
+
+//    var gotFlashcardsNbr = 0;
 
     nextFlashcard = () => {
         this.updateCurrentFlashcard();
@@ -26,7 +30,9 @@ export default class Flashcard extends React.Component {
 
     updateCurrentFlashcard = () => {
 //    TODO check on server
-        axios.post("http://localhost:4000/api/flashcards/updateStatistics", this.props.flashcard );
+        axios.post("http://localhost:4000/api/flashcards/updateStatistics", {
+            flashcard: this.props.flashcard,
+        });
     }
 
     updateFlashcard = () => {
@@ -35,10 +41,12 @@ export default class Flashcard extends React.Component {
     }
 
     getNextFlashcard = () => {
-        axios.get("http://localhost:4000/learning/nextFlashcard")
-        .then(res => {
+        axios.get("http://localhost:4000/learning/nextFlashcard", {
+           params: { categories: this.props.categories.join("&") }
+        }).then(res => {
             const newFlashcard = res.data;
             const status = res.status;
+            this.gotFlashcardsNbr += 1;
             this.setState({
                 status: status,
                 flashcard: newFlashcard
@@ -47,6 +55,8 @@ export default class Flashcard extends React.Component {
     }
 
     render() {
+        if (this.state.status === 204 || this.gotFlashcardsNbr == this.props.flashcardsAmount)
+            return(<LearningSummary />);
         if (this.state.status === 200)
             return(
                 <div className="card">
@@ -60,6 +70,5 @@ export default class Flashcard extends React.Component {
                 </div>
 
             );
-        else if (this.state.status === 204) return(<LearningSummary />);
     }
 }

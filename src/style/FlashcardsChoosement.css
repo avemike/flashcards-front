@@ -56,57 +56,6 @@ form {
   transform: rotate(45deg);
 }
 
-.inputContainerRadio {
-  margin: 0 10px 10px;
-  position: relative;
-  display: block;
-  cursor: pointer;
-}
-
-.inputContainerRadio input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  left: 70px;
-}
-
-.checkmarkRadio {
-  position: absolute;
-  top: 0;
-  left: 70px;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: 50%;
-}
-
-.inputContainerRadio:hover input ~ .checkmarkRadio {
-  background-color: #ccc;
-}
-
-.inputContainerRadio input:checked ~ .checkmarkRadio {
-  background-color: #2cc26f;
-}
-
-.checkmarkRadio:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.inputContainerRadio input:checked ~ .checkmarkRadio:after {
-  display: block;
-}
-
-.inputContainerRadio .checkmarkRadio:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
-}
-
 /*slider*/
 
 .slidecontainer {
@@ -142,4 +91,10 @@ form {
   height: 25px;
   background: #4CAF50;
   cursor: pointer;
+}
+
+.slidecontainer div {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 10px;
 }
