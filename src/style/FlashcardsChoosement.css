@@ -55,3 +55,91 @@ form {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.inputContainerRadio {
+  margin: 0 10px 10px;
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.inputContainerRadio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  left: 70px;
+}
+
+.checkmarkRadio {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.inputContainerRadio:hover input ~ .checkmarkRadio {
+  background-color: #ccc;
+}
+
+.inputContainerRadio input:checked ~ .checkmarkRadio {
+  background-color: #2cc26f;
+}
+
+.checkmarkRadio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.inputContainerRadio input:checked ~ .checkmarkRadio:after {
+  display: block;
+}
+
+.inputContainerRadio .checkmarkRadio:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+/*slider*/
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
