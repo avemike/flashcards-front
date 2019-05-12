@@ -53,8 +53,8 @@ export default class EditFlashcardModal extends Component {
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" data-dismiss="modal" onClick={(e) => this.handleSubmit(e)} class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                            <button type="button" data-dismiss="modal" onClick={(e) => this.handleSubmit(e)} class="btn btn-primary">Edytuj fiszkę</button>
                         </div>
                     </div>
                 </div>
