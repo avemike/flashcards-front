@@ -14,7 +14,13 @@ export default class Flashcard extends React.Component {
         super(props);
         this.state = {
             status: 200,
-            flashcard: {}
+            flashcard: {
+                category: "Jedzenie",
+                name: "Jabłko",
+                answer: "Apple",
+                correctAnswer: 3,
+                badAnswers:2
+            }
         };
         this.gotFlashcardsNbr = -1;
         this.getNextFlashcard();
