@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
 import './flashcard.css'
-import { deleteFlashcard } from '../../actions'
 import EditFlashcardModal from './EditFlashcardModal';
-class Flashcard extends Component {
+export default class Flashcard extends Component {
 
     render() {
         return (
@@ -19,12 +17,12 @@ class Flashcard extends Component {
                     {this.props.flashcard.translatedWord}
                 </div>
                 <div className="row d-flex justify-content-center">
-                    <button onClick={() => this.props.deleteFlashcard(this.props.index)} className="btn btn-danger justify-content-center">
+                    <button onClick={() => this.props.handleDeleteFlashcard(this.props.index)} className="btn btn-danger justify-content-center">
                         Usuń fiszkę</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target={"#deleteFlashcard" + this.props.index}>
                         Edytuj fiszkę
 </button>
-                    <EditFlashcardModal word={this.props.flashcard.word} translatedWord={this.props.flashcard.translatedWord} category={this.props.flashcard.category} index={this.props.index} />
+                    <EditFlashcardModal handleEditFlashcard={this.props.handleEditFlashcard} word={this.props.flashcard.word} translatedWord={this.props.flashcard.translatedWord} category={this.props.flashcard.category} index={this.props.index} />
 
                 </div>
 
@@ -33,4 +31,3 @@ class Flashcard extends Component {
     }
 }
 
-export default connect(null, { deleteFlashcard })(Flashcard)

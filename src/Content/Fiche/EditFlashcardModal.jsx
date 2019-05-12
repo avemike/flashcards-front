@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { editFlashcard } from '../../actions';
-class EditFlashcardModal extends Component {
+export default class EditFlashcardModal extends Component {
     constructor(props) {
         super(props);
-        this.state = { category: '', word: '', translatedWord: '' };
+        this.state = { category: this.props.category, word: this.props.word, translatedWord: this.props.translatedWord };
 
         this.handleWordChange = this.handleWordChange.bind(this);
         this.handleTranslatedWordChange = this.handleTranslatedWordChange.bind(this);
@@ -23,8 +21,8 @@ class EditFlashcardModal extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        this.props.editFlashcard(this.state, this.props.index);
-        this.setState({ category: '', word: '', translatedWord: '' })
+        this.props.handleEditFlashcard(this.state, this.props.index);
+        //     this.setState({ category: '', word: '', translatedWord: '' })
     }
     render() {
         return (
@@ -64,4 +62,3 @@ class EditFlashcardModal extends Component {
         )
     }
 }
-export default connect(null, { editFlashcard })(EditFlashcardModal)

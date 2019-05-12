@@ -1,23 +1,60 @@
 import React, { Component } from 'react'
+export default class EditFlashcardModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { category: '', word: '', translatedWord: '' };
 
-export default class AddFlashcardModal extends Component {
+        this.handleWordChange = this.handleWordChange.bind(this);
+        this.handleTranslatedWordChange = this.handleTranslatedWordChange.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleCategoryChange(event) {
+        this.setState({ category: event.target.value });
+    }
+    handleTranslatedWordChange(event) {
+        this.setState({ translatedWord: event.target.value });
+    }
+    handleWordChange(event) {
+        this.setState({ word: event.target.value });
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        this.props.handleAddFlashcard(this.state);
+        this.setState({ category: '', word: '', translatedWord: '' })
+    }
     render() {
         return (
-            <div class="modal fade" id="addFlashcard" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id={"addFlashcard"} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Edytuj fiszkę</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
-      </div>
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                    Kategoria:
+          <input type="text" value={this.state.category} onChange={this.handleCategoryChange} />
+                                </label>
+                                <label>
+                                    Słowo:
+          <input type="text" value={this.state.word} onChange={this.handleWordChange} />
+                                </label>
+
+                                <label>
+                                    Przetłumaczone słowo:
+          <input type="text" value={this.state.translatedWord} onChange={this.handleTranslatedWordChange} />
+                                </label>
+                            </form>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" data-dismiss="modal" onClick={(e) => this.handleSubmit(e)} class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
