@@ -4,10 +4,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-var apiBaseUrl = "http://localhost:4000/api/";
 import axios from 'axios';
-//uploadpage to strona, do której prowadzi udane logowanie, na razie pusta
 import UploadPage from './UploadPage';
+var apiBaseUrl = "http://localhost:4000/api/";
+//uploadpage to strona, do której prowadzi udane logowanie, na razie pusta
 
 
 const theme = createMuiTheme({
@@ -53,31 +53,30 @@ class Login extends Component {
 
   handleClick(event){
     var self = this;
-    var payload={
-      "email":this.state.email,
-	    "password":this.state.password
+    var payload = {
+      "email": this.state.email,
+	    "password": this.state.password
     }
-    axios.post(apiBaseUrl+'login', payload)
-   .then(function (response) {
-     console.log(response);
-     if(response.data.code == 200){
-       console.log("Login successfull");
-       var uploadScreen=[];
-       uploadScreen.push(<UploadPage appContext={self.props.appContext}/>)
-       self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
-     }
-     else if(response.data.code == 204){
-       console.log("Username password do not match");
-       alert(response.data.success)
-     }
-     else{
-       console.log("Username does not exists");
-       alert("Username does not exist");
-     }
-   })
-   .catch(function (error) {
-     console.log(error);
-   });
+    axios.post(apiBaseUrl + 'login', payload)
+      .then(function (response) {
+        if(response.status == 200){
+          console.log("Login successfull");
+          var uploadScreen=[];
+          uploadScreen.push(<UploadPage appContext={self.props.appContext}/>)
+          self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+        }
+        else if(response.status == 204){
+          console.log("Username password do not match");
+          alert(response.data.success)
+        }
+        else{
+          console.log("Username does not exists");
+          alert("Username does not exist");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   
   render() {

@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-
-
 import './App.css';
 import LoginScreen from './Loginscreen';
+
 class App extends Component {
   constructor(props){
     super(props);
-    this.state={
-      loginPage:[],
-      uploadScreen:[]
+    this.state = {
+      loginPage: [],
+      uploadScreen: []
     }
   }
   componentWillMount(){
-    var loginPage =[];
-    loginPage.push(<LoginScreen appContext={this}/>);
+    const loginPage = [];
+    loginPage.push(<LoginScreen appContext={this} />);
     this.setState({
-                  loginPage:loginPage
-                    })
+      loginPage: loginPage
+    })
   }
   render() {
     return (

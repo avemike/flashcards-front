@@ -45,9 +45,9 @@ class Loginscreen extends Component {
     loginscreen.push(<Login parentContext={this} appContext={this.props.appContext}/>);
     var loginmessage = "Jeszcze niezarejestrowany? Załóż konto!";
     this.setState({
-                  loginscreen:loginscreen,
-                  loginmessage:loginmessage
-                    })
+      loginscreen:loginscreen,
+      loginmessage:loginmessage
+    })
   }
   handleClick(event){
     console.log("event");
@@ -67,13 +67,13 @@ class Loginscreen extends Component {
         </div>
       )
       this.setState({
-                     loginscreen:loginscreen,
-                     loginmessage:loginmessage,
-                     loginButtons:loginButtons,
-                     isLogin:false
-                   })
+        loginscreen:loginscreen,
+        loginmessage:loginmessage,
+        loginButtons:loginButtons,
+        isLogin:false
+      })
     }
-    else{
+    else {
       let loginscreen=[],loginButtons=[];
       loginButtons.push(
         <div>
@@ -87,11 +87,11 @@ class Loginscreen extends Component {
       loginscreen.push(<Login parentContext={this} appContext={this.props.appContext}/>);
       loginmessage = "Jeszcze niezarejestrowany? Załóż konto!";
       this.setState({
-                     loginscreen:loginscreen,
-                     loginmessage:loginmessage,
-                     loginButtons:loginButtons,
-                     isLogin:true
-                   })
+        loginscreen: loginscreen,
+        loginmessage: loginmessage,
+        loginButtons: loginButtons,
+        isLogin: true
+      })
     }
   }
   render() {

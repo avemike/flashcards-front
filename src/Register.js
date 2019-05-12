@@ -34,13 +34,13 @@ class Register extends Component {
     //To be done:check for empty values before hitting submit
     if(this.state.email.length>0 && this.state.password.length>0){
       var payload={
-      "userid":this.state.email,
+      "email":this.state.email,
       "password":this.state.password
       }
-      axios.post(apiBaseUrl+'/register', payload)
+      axios.post(apiBaseUrl+'register', payload)
      .then(function (response) {
        console.log(response);
-       if(response.data.code === 200){
+       if(response.status === 200){
          console.log("registration successfull");
          var loginscreen=[];
          loginscreen.push(<Login parentContext={this} appContext={self.props.appContext}/>);
@@ -52,7 +52,7 @@ class Register extends Component {
           });
        }
        else{
-         console.log("some error ocurred",response.data.code);
+         console.log("some error ocurred",response.status);
        }
      })
      .catch(function (error) {
