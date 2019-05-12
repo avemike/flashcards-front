@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Flashcard from './Flashcard';
 import "../style/FlashcardsChoosement.css";
 import { imgLogo } from './Flashcard.js'
 
@@ -11,7 +12,8 @@ export default class FlashcardsChoosement extends React.Component {
            flashcardsNbr: {
                 max: 1,
                 current: 1
-           }
+           },
+           gotoFlashcards: false
         };
         this.getCategories();
     }
@@ -56,6 +58,10 @@ export default class FlashcardsChoosement extends React.Component {
         });
     }
 
+    startLearning = () => {
+        this.setState({gotoFlashcards: true});
+    }
+
     render () {
         const renderedCategories = this.state.categories.map((category, index) =>
             <label className="inputContainer">
@@ -66,8 +72,8 @@ export default class FlashcardsChoosement extends React.Component {
             </label>
         );
 
-        return (
-            <div className="card">
+        if (!this.state.gotoFlashcards)
+            return (<div className="card">
                 <img src={imgLogo.src} alt={imgLogo.alt} />
                 <p>Wybierz kategorie:</p>
                 <form>
@@ -82,8 +88,8 @@ export default class FlashcardsChoosement extends React.Component {
                   <div>{this.state.flashcardsNbr.current}</div>
                 </div>
 
-                <button>Dalej</button>
-            </div>
-        );
+                <button onClick={this.startLearning}>Dalej</button>
+            </div>);
+        else return(<Flashcard />);
     }
 }
