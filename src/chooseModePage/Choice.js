@@ -32,7 +32,7 @@ const Choice = probs => {
 				<MiniFlashcard>
 					<Button
 						text="Nauka"
-						onClick="Home"
+						onClick="Test"
 					/>
 				</MiniFlashcard>
 				<MiniFlashcard>
