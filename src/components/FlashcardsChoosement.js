@@ -25,7 +25,13 @@ export default class FlashcardsChoosement extends React.Component {
     }
 
     getCategories = () => {
-        axios.get("http://localhost:4000/api/categories")
+        axios.get("http://localhost:4000/api/categories", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem("userKey")
+            }
+        })
         .then(res => {
             let innerCategories = res.data.map(category => ({...category, isTicked:false}));
             innerCategories[0].isTicked = true;
@@ -58,7 +64,13 @@ export default class FlashcardsChoosement extends React.Component {
             .filter((category) => category.isTicked)
             const categoryId = selectCategory[0]._id;
         
-           axios.get("http://localhost:4000/api/categories/" + categoryId + "/flashcards")
+        axios.get("http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem("userKey")
+            }
+        })
               .then(res => {
                 this.setState({flashcardsNbr: {
                             max: res.data.length

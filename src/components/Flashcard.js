@@ -42,7 +42,13 @@ export default class Flashcard extends React.Component {
       badAnswers: this.state.flashcard.badAnswers
     };
 
-    axios.put("http://localhost:4000/api/flashcards/" + cardId, flashcardToUpdate);
+    axios.put("http://localhost:4000/api/flashcards/" + cardId, flashcardToUpdate, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem("userKey")
+      }
+    });
   };
 
   updateFlashcard = () => {
@@ -54,7 +60,13 @@ export default class Flashcard extends React.Component {
     const categoryId = this.props.categories[0]._id;
 
     return axios.get(
-        "http://localhost:4000/api/categories/" + categoryId + "/flashcards")
+      "http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-auth-token': localStorage.getItem("userKey")
+        }
+      })
       .then(res => {      
         this.setState({ 
           flashcards: res.data
