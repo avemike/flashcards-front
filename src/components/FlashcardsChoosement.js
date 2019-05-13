@@ -21,11 +21,11 @@ export default class FlashcardsChoosement extends React.Component {
         this.countTotalFlashcardsNumber = this.countTotalFlashcardsNumber.bind(this);
         this.listTickedCategories = this.listTickedCategories.bind(this);
         this.startLearning = this.startLearning.bind(this);
-        this.getCategories();
+        this.getCategories();   
     }
 
     getCategories = () => {
-        axios.get("http://localhost:4000/api/categories")
+        return axios.get("http://localhost:4000/api/categories")
         .then(res => {
             let innerCategories = res.data.map(category => ({...category, isTicked:false}));
             innerCategories[0].isTicked = true;
@@ -90,7 +90,6 @@ export default class FlashcardsChoosement extends React.Component {
     startLearning = () => {
         this.setState({gotoFlashcards: true});
     }
-
     render () {
         const renderedCategories = this.state.categories.map((category, index) =>
             <label className="inputContainer">
@@ -100,7 +99,6 @@ export default class FlashcardsChoosement extends React.Component {
                 <span className="checkmark"></span>
             </label>
         );
-        {console.log(this.state)}
         if (!this.state.gotoFlashcards)
             return (<div className="card">
                 <img src={imgLogo.src} alt={imgLogo.alt} />
@@ -123,6 +121,7 @@ export default class FlashcardsChoosement extends React.Component {
         <Flashcard
             flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
             categories = {this.listTickedCategories()} //tu
-        />);
+        />
+        );
     }
 }

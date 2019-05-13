@@ -24,7 +24,6 @@ export default class Flashcard extends React.Component {
     this.getNextFlashcard = this.getNextFlashcard.bind(this);
 
     this.gotFlashcardsNbr = -1;
-    this.getNextFlashcard();
   }
 
   nextFlashcard = () => {
@@ -63,19 +62,27 @@ export default class Flashcard extends React.Component {
   };
 
   getNextFlashcard = async () => {
-    await this.getFlashcardsOfCategory();
+    // await this.getFlashcardsOfCategory(); TEMP1
 
     const amount = this.props.flashcardsAmount;
     let indeks = Math.floor(Math.random() * amount);
-
-    const newFlashcard = this.state.flashcards.filter(f => f.correctAnswers < 3)[indeks];
+    const newFlashcard = this.state.flashcards.filter(f => { 
+      return f.correctAnswers < 10;
+     }
+    )[indeks];
+    
     this.setState({
       flashcard: newFlashcard
     });
   };
-
   componentDidMount() {
-    this.getFlashcardsOfCategory();
+    const aaa = async () => {
+      await this.getFlashcardsOfCategory();
+      await this.getNextFlashcard(); 
+      console.log(this.state)
+    }
+    aaa()
+
   }
 
   render() {
