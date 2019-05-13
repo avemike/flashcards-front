@@ -15,15 +15,17 @@ const ButtonLandingStyle = {
 	"boxSizing": "content-box"
 }
 
-const gotoRegister = () => {
-	alert("Przeneisienie na stronę rejetracji")
+const route = destination => {
+
+	alert(`Przeniesienie do ${destination}`)
 }
 
 const ButtonLanding = probs => {
 	return (
-		<button className="button"
-			onClick={gotoRegister}
+		<button 
+			className="button"
 			style={ButtonLandingStyle}
+			onClick={() =>route(probs.onClick)}
 		>
 			{probs.text || "BRAK TEKSTU"}
 		</button>
