@@ -37,13 +37,26 @@ export default class EditFlashcardModal extends Component {
     };
     console.log(editFlashcard);
     return axios
-      .put(`http://localhost:4000/api/flashcards/` + this.props.flashcard._id, editFlashcard)
+      .put(`http://localhost:4000/api/flashcards/` + this.props.flashcard._id, editFlashcard, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'x-auth-token': localStorage.getItem("userKey")
+            }
+          }
+        )
       .then(res => {
         axios.post(
           "http://localhost:4000/api/flashcards/" +
             res.data._id +
             "/categories/" +
-            this.state.categoryId
+          this.state.categoryId, {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'x-auth-token': localStorage.getItem("userKey")
+            }
+          }
         );
       });
 

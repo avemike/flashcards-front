@@ -44,7 +44,13 @@ export default class Content extends Component {
     }
 
     getAllFlashcards() {
-       return axios.get("http://localhost:4000/api/flashcards")
+        return axios.get("http://localhost:4000/api/flashcards", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem("userKey")
+            }
+        })
         .then(res => {
             this.setState({
                 flashcards: res.data
@@ -53,7 +59,13 @@ export default class Content extends Component {
     }
 
     getAllCategories() {
-        return axios.get("http://localhost:4000/api/categories")
+        return axios.get("http://localhost:4000/api/categories", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem("userKey")
+            }
+        })
         .then(res => {
             this.setState({
                 categories: res.data
@@ -62,7 +74,13 @@ export default class Content extends Component {
     }
 
     handleDeleteFlashcard(index) {
-        axios.delete("http://localhost:4000/api/flashcards/" + index)
+        axios.delete("http://localhost:4000/api/flashcards/" + index), {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem("userKey")
+            }
+        }
         // this.setState({
         //     flashcards: this.state.flashcards.filter((data, i) => i !== index)
         // })

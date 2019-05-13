@@ -12,7 +12,13 @@ export default class Flashcard extends Component {
         this.getFlashcardCategory();
     }
     getFlashcardCategory() {
-    return axios.get('http://localhost:4000/api/flashcards/' + this.props.flashcard._id + '/categories')
+        return axios.get('http://localhost:4000/api/flashcards/' + this.props.flashcard._id + '/categories', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem("userKey")
+            }
+        })
         .then(res => 
             {
             this.setState({
