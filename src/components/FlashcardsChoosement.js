@@ -21,7 +21,7 @@ export default class FlashcardsChoosement extends React.Component {
         this.countTotalFlashcardsNumber = this.countTotalFlashcardsNumber.bind(this);
         this.listTickedCategories = this.listTickedCategories.bind(this);
         this.startLearning = this.startLearning.bind(this);
-        this.getCategories();
+        this.getCategories();   
     }
 
     getCategories = () => {
@@ -102,7 +102,6 @@ export default class FlashcardsChoosement extends React.Component {
     startLearning = () => {
         this.setState({gotoFlashcards: true});
     }
-
     render () {
         const renderedCategories = this.state.categories.map((category, index) =>
             <label className="inputContainer">
@@ -112,7 +111,6 @@ export default class FlashcardsChoosement extends React.Component {
                 <span className="checkmark"></span>
             </label>
         );
-        {console.log(this.state)}
         if (!this.state.gotoFlashcards)
             return (<div className="card">
                 <img src={imgLogo.src} alt={imgLogo.alt} />
@@ -135,6 +133,7 @@ export default class FlashcardsChoosement extends React.Component {
         <Flashcard
             flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
             categories = {this.listTickedCategories()} //tu
-        />);
+        />
+        );
     }
 }
