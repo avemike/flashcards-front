@@ -62,7 +62,6 @@ export default class Content extends Component {
     }
 
     handleDeleteFlashcard(index) {
-        console.log("ind " + index)
         axios.delete("http://localhost:4000/api/flashcards/" + index)
         // this.setState({
         //     flashcards: this.state.flashcards.filter((data, i) => i !== index)
@@ -71,7 +70,6 @@ export default class Content extends Component {
 
     handleAddFlashcard(flashcard) {
         this.setState({ flashcards: [...this.state.flashcards, flashcard] })
-        console.log("wwww " + this.state.flashcards);
     }
 
     handleEditFlashcard(flashcard, index) {

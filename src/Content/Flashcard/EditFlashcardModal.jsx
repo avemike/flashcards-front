@@ -4,18 +4,20 @@ import axios from "axios";
 export default class EditFlashcardModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { category: "", word: "", translatedWord: "" };
+    this.state = { categoryId: "", word: "", translatedWord: "" };
 
     this.handleWordChange = this.handleWordChange.bind(this);
-    this.handleTranslatedWordChange = this.handleTranslatedWordChange.bind(
-      this
-    );
+    this.handleTranslatedWordChange = this.handleTranslatedWordChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleCategoryChange(event) {
-    this.setState({ category: event.target.value });
+    const categoryId = this.props.categories
+      .filter(c => c.name === event.target.value)
+      .map(cat => cat._id);
+
+    this.setState({ categoryId: categoryId });
   }
   handleTranslatedWordChange(event) {
     this.setState({ translatedWord: event.target.value });
@@ -25,7 +27,7 @@ export default class EditFlashcardModal extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    
+
     const editFlashcard = {
       firstText: this.state.word,
       secondText: this.state.translatedWord,
@@ -36,6 +38,14 @@ export default class EditFlashcardModal extends Component {
     console.log(editFlashcard);
     return axios
       .put(`http://localhost:4000/api/flashcards/` + this.props.flashcard._id, editFlashcard)
+      .then(res => {
+        axios.post(
+          "http://localhost:4000/api/flashcards/" +
+            res.data._id +
+            "/categories/" +
+            this.state.categoryId
+        );
+      });
 
   }
   render() {
@@ -65,13 +75,13 @@ export default class EditFlashcardModal extends Component {
             </div>
             <div class="modal-body">
               <form onSubmit={this.handleSubmit}>
-                <label>
+              <label>
                   Kategoria:
-                  <input
-                    type="text"
-                    value={this.state.category}
-                    onChange={this.handleCategoryChange}
-                  />
+                  <select onChange={this.handleCategoryChange}>
+                    {this.props.categories.map(e => {
+                      return <option>{e.name}</option>;
+                    })}
+                  </select>
                 </label>
                 <label>
                   Słowo:

@@ -42,7 +42,7 @@ export default class Flashcard extends Component {
 </button>
 
                 </div>
-                <EditFlashcardModal handleEditFlashcard={this.props.handleEditFlashcard} flashcard={this.props.flashcard} word={this.props.flashcard.firstText} translatedWord={this.props.flashcard.secondText} category={this.props.flashcard.category} index={this.props.index} />
+                <EditFlashcardModal categories={this.props.categories} handleEditFlashcard={this.props.handleEditFlashcard} flashcard={this.props.flashcard} word={this.props.flashcard.firstText} translatedWord={this.props.flashcard.secondText} category={this.props.flashcard.category} index={this.props.index} />
             </div>
         )
     }
