@@ -1,14 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import LandingPage from './landingPage/App';
-const App = () =>{
-	return (
-		<div>
-			<LandingPage />
-		</div>
-	);
-}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
 
-ReactDOM.render(<App />,document.getElementById('root'))
-
+// document.body.style = 'background:  rgb(221, 250, 221);';

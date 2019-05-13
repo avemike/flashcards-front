@@ -57,11 +57,11 @@ header h1 {
   text-align: center;
 }
 
-#root {
+/* #root {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .button {
   margin: 20px auto;
