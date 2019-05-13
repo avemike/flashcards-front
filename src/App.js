@@ -1,30 +1,19 @@
-import React, { Component } from 'react';
-import './App.css';
-import LoginScreen from './Loginscreen';
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';
+import LoginRegisterPage from './loginRegisterPage/App';
+import RedirectPage from './RedirectPage';
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      loginPage: [],
-      uploadScreen: []
-    }
-  }
-  componentWillMount(){
-    const loginPage = [];
-    loginPage.push(<LoginScreen appContext={this} />);
-    this.setState({
-      loginPage: loginPage
-    })
-  }
-  render() {
-    return (
-      <div className="App">
-        {this.state.loginPage}
-        {this.state.uploadScreen}
-      </div>
-    );
-  }
-}
+const App = () => (
+    <Router>
+        <div>
+            <Route path="/" exact component={RedirectPage} />
+            <Route path="/loginRegister" component={LoginRegisterPage} />
+        </div>
+    </Router>
+);
 
 export default App;
