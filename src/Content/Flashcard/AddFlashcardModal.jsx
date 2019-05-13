@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+
 export default class EditFlashcardModal extends Component {
     constructor(props) {
         super(props);
@@ -21,12 +23,22 @@ export default class EditFlashcardModal extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        this.props.handleAddFlashcard(this.state);
-        this.setState({ category: '', word: '', translatedWord: '' })
+        const newFlashcard = {
+            firstText: this.state.word,
+            secondText: this.state.translatedWord
+        }
+        axios
+      .post(`http://localhost:4000/api/flashcards`, newFlashcard)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+        // this.props.handleAddFlashcard(this.state);
+        // this.setState({ category: '', word: '', translatedWord: '' })
     }
     render() {
         return (
-            <div class="modal fade" id={"addFlashcard"} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div className="modal fade" id={"addFlashcard"} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

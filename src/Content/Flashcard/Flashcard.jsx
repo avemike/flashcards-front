@@ -3,7 +3,9 @@ import './flashcard.css'
 import EditFlashcardModal from './EditFlashcardModal';
 export default class Flashcard extends Component {
 
+    
     render() {
+        console.log(this.props.flashcard.firstText)
         return (
             <div className='card col-3'>
                 <div className="row ">
@@ -11,10 +13,10 @@ export default class Flashcard extends Component {
                 </div>
 
                 <div className="row d-flex justify-content-center">
-                    {this.props.flashcard.word}
+                    {this.props.flashcard.firstText}
                 </div>
                 <div className="row d-flex justify-content-center">
-                    {this.props.flashcard.translatedWord}
+                    {this.props.flashcard.secondText}
                 </div>
                 <div className="row d-flex justify-content-center">
                     <button onClick={() => this.props.handleDeleteFlashcard(this.props.index)} className="btn btn-danger justify-content-center">
@@ -25,7 +27,7 @@ export default class Flashcard extends Component {
 
                 </div>
                 <EditFlashcardModal handleEditFlashcard={this.props.handleEditFlashcard} word={this.props.flashcard.word} translatedWord={this.props.flashcard.translatedWord} category={this.props.flashcard.category} index={this.props.index} />
-            </div >
+            </div>
         )
     }
 }

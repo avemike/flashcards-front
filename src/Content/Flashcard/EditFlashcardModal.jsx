@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
+
 export default class EditFlashcardModal extends Component {
     constructor(props) {
         super(props);
@@ -21,8 +23,18 @@ export default class EditFlashcardModal extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        this.props.handleEditFlashcard(this.state, this.props.index);
-        this.setState({ category: '', word: '', translatedWord: '' })
+        const editFlashcard = {
+            firstText: this.state.word,
+            secondText: this.state.translatedWord
+        }
+        axios
+      .put(`http://localhost:4000/api/flashcards`, editFlashcard)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+        // this.props.handleEditFlashcard(this.state, this.props.index);
+        // this.setState({ category: '', word: '', translatedWord: '' })
     }
     render() {
         return (
