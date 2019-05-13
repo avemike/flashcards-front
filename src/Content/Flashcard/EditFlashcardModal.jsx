@@ -1,76 +1,117 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class EditFlashcardModal extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { category: '', word: '', translatedWord: '' };
+  constructor(props) {
+    super(props);
+    this.state = { category: "", word: "", translatedWord: "" };
 
-        this.handleWordChange = this.handleWordChange.bind(this);
-        this.handleTranslatedWordChange = this.handleTranslatedWordChange.bind(this);
-        this.handleCategoryChange = this.handleCategoryChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    this.handleWordChange = this.handleWordChange.bind(this);
+    this.handleTranslatedWordChange = this.handleTranslatedWordChange.bind(
+      this
+    );
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    handleCategoryChange(event) {
-        this.setState({ category: event.target.value });
-    }
-    handleTranslatedWordChange(event) {
-        this.setState({ translatedWord: event.target.value });
-    }
-    handleWordChange(event) {
-        this.setState({ word: event.target.value });
-    }
-    handleSubmit(event) {
-        event.preventDefault();
-        const editFlashcard = {
-            firstText: this.state.word,
-            secondText: this.state.translatedWord
-        }
-        axios
-      .put(`http://localhost:4000/api/flashcards`, editFlashcard)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
-        // this.props.handleEditFlashcard(this.state, this.props.index);
-        // this.setState({ category: '', word: '', translatedWord: '' })
-    }
-    render() {
-        return (
-            <div class="modal fade" id={"deleteFlashcard" + this.props.index} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Edytuj fiszkę</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form onSubmit={this.handleSubmit}>
-                                <label>
-                                    Kategoria:
-          <input type="text" value={this.state.category} onChange={this.handleCategoryChange} />
-                                </label>
-                                <label>
-                                    Słowo:
-          <input type="text" value={this.state.word} onChange={this.handleWordChange} />
-                                </label>
+  handleCategoryChange(event) {
+    this.setState({ category: event.target.value });
+  }
+  handleTranslatedWordChange(event) {
+    this.setState({ translatedWord: event.target.value });
+  }
+  handleWordChange(event) {
+    this.setState({ word: event.target.value });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    
+    const editFlashcard = {
+      firstText: this.state.word,
+      secondText: this.state.translatedWord,
+      correctAnswers: this.props.flashcard.correctAnswers,
+      badAnswers: this.props.flashcard.badAnswers
 
-                                <label>
-                                    Przetłumaczone słowo:
-          <input type="text" value={this.state.translatedWord} onChange={this.handleTranslatedWordChange} />
-                                </label>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                            <button type="button" data-dismiss="modal" onClick={(e) => this.handleSubmit(e)} class="btn btn-primary">Edytuj fiszkę</button>
-                        </div>
-                    </div>
-                </div>
+    };
+    console.log(editFlashcard);
+    return axios
+      .put(`http://localhost:4000/api/flashcards/` + this.props.flashcard._id, editFlashcard)
+
+  }
+  render() {
+    return (
+      <div
+        class="modal fade"
+        id={"deleteFlashcard" + this.props.index}
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">
+                Edytuj fiszkę
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-        )
-    }
+            <div class="modal-body">
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  Kategoria:
+                  <input
+                    type="text"
+                    value={this.state.category}
+                    onChange={this.handleCategoryChange}
+                  />
+                </label>
+                <label>
+                  Słowo:
+                  <input
+                    type="text"
+                    defaultValue={this.props.word}
+                    onChange={this.handleWordChange}
+                  />
+                </label>
+
+                <label>
+                  Przetłumaczone słowo:
+                  <input
+                    type="text"
+                    defaultValue={this.props.translatedWord}
+                    onChange={this.handleTranslatedWordChange}
+                  />
+                </label>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Anuluj
+              </button>
+              <button
+                type="button"
+                data-dismiss="modal"
+                onClick={e => this.handleSubmit(e)}
+                class="btn btn-primary"
+              >
+                Edytuj fiszkę
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

@@ -8,7 +8,8 @@ export default class Content extends Component {
     constructor(props) {
         super(props)
         this.state ={
-            flashcards: []
+            flashcards: [],
+            categories: []
         }
         // this.state = {
         //     flashcards: [{
@@ -35,6 +36,7 @@ export default class Content extends Component {
         // }
 
         this.getAllFlashcards();
+        this.getAllCategories();
 
         this.handleDeleteFlashcard = this.handleDeleteFlashcard.bind(this);
         this.handleAddFlashcard = this.handleAddFlashcard.bind(this);
@@ -44,21 +46,32 @@ export default class Content extends Component {
     getAllFlashcards() {
        return axios.get("http://localhost:4000/api/flashcards")
         .then(res => {
-            console.log(res.data);
             this.setState({
                 flashcards: res.data
             })
         });
     }
 
-    handleDeleteFlashcard(index) {
-        this.setState({
-            flashcards: this.state.flashcards.filter((data, i) => i !== index)
+    getAllCategories() {
+        return axios.get("http://localhost:4000/api/categories")
+        .then(res => {
+            this.setState({
+                categories: res.data
+            })
         })
+    }
+
+    handleDeleteFlashcard(index) {
+        console.log("ind " + index)
+        axios.delete("http://localhost:4000/api/flashcards/" + index)
+        // this.setState({
+        //     flashcards: this.state.flashcards.filter((data, i) => i !== index)
+        // })
     }
 
     handleAddFlashcard(flashcard) {
         this.setState({ flashcards: [...this.state.flashcards, flashcard] })
+        console.log("wwww " + this.state.flashcards);
     }
 
     handleEditFlashcard(flashcard, index) {
@@ -68,11 +81,11 @@ export default class Content extends Component {
     render() {
         return (
             <div className='row'>
-                <AddFlashcard />
+                <AddFlashcard categories={this.state.categories}/>
                 {this.state.flashcards.map((el, i) => {
-                    return <Flashcard handleEditFlashcard={this.handleEditFlashcard} handleDeleteFlashcard={this.handleDeleteFlashcard} key={i} index={i} flashcard={el} />
+                    return <Flashcard categories={this.state.categories} handleEditFlashcard={this.handleEditFlashcard} handleDeleteFlashcard={this.handleDeleteFlashcard} key={i} index={i} flashcard={el} />
                 })}
-                <AddFlashcardModal handleAddFlashcard={this.handleAddFlashcard} />
+                <AddFlashcardModal  categories={this.state.categories} handleAddFlashcard={this.handleAddFlashcard} />
 
             </div>
 

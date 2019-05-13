@@ -4,6 +4,8 @@ import axios from 'axios';
 export default class EditFlashcardModal extends Component {
     constructor(props) {
         super(props);
+        console.log("w modal")
+        console.log(this.props.categories)
         this.state = { category: '', word: '', translatedWord: '' };
 
         this.handleWordChange = this.handleWordChange.bind(this);
@@ -37,6 +39,8 @@ export default class EditFlashcardModal extends Component {
         // this.setState({ category: '', word: '', translatedWord: '' })
     }
     render() {
+        console.log("w modal")
+        console.log(this.props.categories[0])
         return (
             <div className="modal fade" id={"addFlashcard"} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -51,7 +55,7 @@ export default class EditFlashcardModal extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <label>
                                     Kategoria:
-          <input type="text" value={this.state.category} onChange={this.handleCategoryChange} />
+          <input type="text" value={this.props.categories[0]} onChange={this.handleCategoryChange} />
                                 </label>
                                 <label>
                                     Słowo:
