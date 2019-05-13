@@ -1,50 +1,61 @@
-import React from 'react';
-import "../style/learning-module.css";
 import "../style/AnswerChecker.css";
+import React from "react";
 
 export default class AnswerChecker extends React.Component {
-    state = {
-        userAnswer: "",
-        properValue: ""
-    };
+  properValueId = "properValue";
 
-    checkUserAnswer = (event) => {
-        this.isAnswerCorrect() ? this.setAnswerCorrect() : this.setAnswerIncorrect();
+  state = {
+    userAnswer: ""
+  };
 
-        console.log("Correct answers " + this.props.flashcard.correctAnswer);
-        console.log("Bad answers " + this.props.flashcard.badAnswers);
-    };
+  handleAnswerChange = event => {
+    this.setState({ answer: event.target.value });
+  };
 
+  checkUserAnswer = event => {
+    this.isAnswerCorrect()
+      ? this.setAnswerCorrect()
+      : this.setAnswerIncorrect();
 
-    isAnswerCorrect = () => {
-        return this.state.userAnswer.toLowerCase() === this.props.flashcard.answer.toLowerCase();
-    };
+    console.log("Correct answers " + this.props.flashcard.correctAnswers);
+    console.log("Bad answers " + this.props.flashcard.badAnswers);
+  };
 
-    setAnswerCorrect = () => {
-        this.props.flashcard.correctAnswer += 1;
-        this.setTextFrameStyle("properAnswer");
-    }
+  isAnswerCorrect = () => {
+    return (
+      this.state.answer.toLowerCase() ===
+      this.props.flashcard.secondText.toLowerCase()
+    );
+  };
 
-    setAnswerIncorrect = () => {
-        this.props.flashcard.badAnswers += 1;
-        this.setTextFrameStyle("wrongAnswer");
-        this.setState({properValue: this.props.flashcard.answer});
-        document.getElementById(this.props.properValueId).hidden = false;
+  setAnswerCorrect = () => {
+    this.props.flashcard.correctAnswers += 1;
+    this.setTextFrameStyle("properAnswer");
+  };
 
-    }
+  setAnswerIncorrect = () => {
+    this.props.flashcard.badAnswers += 1;
+    this.setTextFrameStyle("wrongAnswer");
+  };
 
-    setTextFrameStyle = (className) => {
-        document.getElementById(this.props.textButtonContainerId).getElementsByTagName("textarea")[0].className = className;
-    }
+  setTextFrameStyle = className => {
+    document
+      .getElementById("textButtonContainer")
+      .getElementsByTagName("textarea")[0].className = className;
+  };
 
-    render() {
-        return (
-            <div id={this.props.textButtonContainerId}>
-                <div id={this.props.properValueId}>{this.state.properValue}</div>
-                <textarea rows="2" cols="44"
-                    onChange={e => this.setState({userAnswer:e.target.value})}></textarea>
-                <button onClick={this.checkUserAnswer}>Sprawdź</button>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div id="textButtonContainer">
+        <div id={this.properValueId} />
+        <textarea
+          rows="2"
+          cols="44"
+          name="secondText"
+          onChange={this.handleAnswerChange.bind(this)}
+        />
+        <button onClick={this.checkUserAnswer}>Sprawdź</button>
+      </div>
+    );
+  }
 }

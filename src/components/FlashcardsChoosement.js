@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Flashcard from './Flashcard';
-import "../style/learning-module.css";
 import "../style/FlashcardsChoosement.css";
 import { imgLogo } from './Flashcard.js'
 
@@ -20,11 +19,14 @@ export default class FlashcardsChoosement extends React.Component {
     }
 
     getCategories = () => {
-        axios.get("http://localhost:4000/learning/categories")
+        axios.get("http://localhost:4000/api/categories")
         .then(res => {
             let innerCategories = res.data.map(category => ({...category, isTicked:false}));
             innerCategories[0].isTicked = true;
-            this.state.categories = innerCategories;
+            this.setState({
+                categories: innerCategories
+            });
+            // this.state.categories = innerCategories;
             this.countTotalFlashcardsNumber();
         });
     }
@@ -46,23 +48,37 @@ export default class FlashcardsChoosement extends React.Component {
     }
 
     countTotalFlashcardsNumber = () => {
-        const totalFlashcardsNbr = this.state.categories
+           const selectCategory = this.state.categories
             .filter((category) => category.isTicked)
-            .map((category) => category.count)
-            .reduce((total, next) => { return total + next}, 0);
+            const categoryId = selectCategory[0]._id;
+        
+           axios.get("http://localhost:4000/api/categories/" + categoryId + "/flashcards")
+              .then(res => {
+                this.setState({flashcardsNbr: {
+                            max: res.data.length
+                        }
+                    });
+                });
+                console.log("maksior " + this.state.flashcardsNbr.max);
+          };
+        // const totalFlashcardsNbr = this.state.categories
+        //     .filter((category) => category.isTicked)
+        //     .map((category) => category.count)
+        //     .reduce((total, next) => { return total + next}, 0);
 
-        const setFlashcardNbr = parseInt(totalFlashcardsNbr / 2);
-        this.setState({flashcardsNbr: {
-                max: totalFlashcardsNbr,
-                flashcardAmount: setFlashcardNbr
-            }
-        });
-    }
+        // const setFlashcardNbr = parseInt(totalFlashcardsNbr / 2);
+        // this.setState({flashcardsNbr: {
+        //         max: totalFlashcardsNbr,
+        //         flashcardAmount: setFlashcardNbr
+        //     }
+        // });
+        // console.log(this.state.flashcardsNbr.max);
+    // }
 
     listTickedCategories = () => {
         return this.state.categories
-            .filter((category) => category.isTicked)
-            .map((category) => category.name);
+            .filter((category) => category.isTicked);
+            // .map((category) => category.name);
     }
 
     startLearning = () => {
@@ -86,13 +102,13 @@ export default class FlashcardsChoosement extends React.Component {
                 <form>
                     {renderedCategories}
                 </form>
-                <p>Wybierz liczbę fiszek do nauki:</p>
+                <p>Wybierz liczbę fiszek do nauki</p>
 
                 <div className="slidecontainer">
-                  <div>{this.state.flashcardsNbr.flashcardAmount}</div>   
                   <input type="range" className="slider" min="1" max={this.state.flashcardsNbr.max}
                     defaultValue={this.state.flashcardsNbr.flashcardAmount}
                     onChange={this.flashcardNbrChoose}/>
+                  <div>{this.state.flashcardsNbr.flashcardAmount}</div>
                 </div>
 
                 <button onClick={this.startLearning}>Dalej</button>
