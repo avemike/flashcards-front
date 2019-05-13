@@ -15,6 +15,12 @@ export default class FlashcardsChoosement extends React.Component {
            },
            gotoFlashcards: false
         };
+        this.getCategories = this.getCategories.bind(this);
+        this.flashcardNbrChoose = this.flashcardNbrChoose.bind(this);
+        this.categoryTicked = this.categoryTicked.bind(this);
+        this.countTotalFlashcardsNumber = this.countTotalFlashcardsNumber.bind(this);
+        this.listTickedCategories = this.listTickedCategories.bind(this);
+        this.startLearning = this.startLearning.bind(this);
         this.getCategories();
     }
 
@@ -94,7 +100,7 @@ export default class FlashcardsChoosement extends React.Component {
                 <span className="checkmark"></span>
             </label>
         );
-
+        {console.log(this.state)}
         if (!this.state.gotoFlashcards)
             return (<div className="card">
                 <img src={imgLogo.src} alt={imgLogo.alt} />
@@ -107,15 +113,16 @@ export default class FlashcardsChoosement extends React.Component {
                 <div className="slidecontainer">
                   <input type="range" className="slider" min="1" max={this.state.flashcardsNbr.max}
                     defaultValue={this.state.flashcardsNbr.flashcardAmount}
-                    onChange={this.flashcardNbrChoose}/>
+                    onChange={this.flashcardNbrChoose}/> {/* tu */}
                   <div>{this.state.flashcardsNbr.flashcardAmount}</div>
                 </div>
 
-                <button onClick={this.startLearning}>Dalej</button>
+                <button onClick={this.startLearning}>Dalej</button> {/* tu */}
             </div>);
-        else return(<Flashcard
-            flashcardsAmount = {this.state.flashcardsNbr.flashcardAmount}
-            categories = {this.listTickedCategories()}
+        else return(
+        <Flashcard
+            flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
+            categories = {this.listTickedCategories()} //tu
         />);
     }
 }

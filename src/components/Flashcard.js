@@ -17,18 +17,18 @@ export default class Flashcard extends React.Component {
       flashcards: [],
       flashcard: {}
     };
+    this.nextFlashcard = this.nextFlashcard.bind(this);
+    this.updateCurrentFlashcard = this.updateCurrentFlashcard.bind(this);
+    this.updateFlashcard = this.updateFlashcard.bind(this);
+    this.getFlashcardsOfCategory = this.getFlashcardsOfCategory.bind(this);
+    this.getNextFlashcard = this.getNextFlashcard.bind(this);
+
     this.gotFlashcardsNbr = -1;
     this.getNextFlashcard();
   }
 
-  //    var gotFlashcardsNbr = 0;
-
   nextFlashcard = () => {
-    console.log(this.state.flashcard.correctAnswers);
-    console.log(this.state.flashcard.badAnswers);
-
     this.updateCurrentFlashcard();
-
     this.getNextFlashcard();
   };
 
@@ -51,44 +51,32 @@ export default class Flashcard extends React.Component {
   };
 
   getFlashcardsOfCategory = () => {
-
-    console.log(this.props.categories[0]._id);
     const categoryId = this.props.categories[0]._id;
-    axios
-      .get(
+
+    return axios.get(
         "http://localhost:4000/api/categories/" + categoryId + "/flashcards")
-      .then(res => {
-        console.log("stat ");
-        console.log(res.data);
-        this.setState({
+      .then(res => {      
+        this.setState({ 
           flashcards: res.data
         });
-        console.log("sss")
-      // console.log(this.state.flashcards.length);
-
       });
-      console.log(this.state.flashcards)
-
   };
 
   getNextFlashcard = async () => {
     await this.getFlashcardsOfCategory();
 
-    console.log(this.props.flashcardsAmount);
     const amount = this.props.flashcardsAmount;
     let indeks = Math.floor(Math.random() * amount);
-    console.log(this.state.flashcards.filter(f => f.correctAnswers < 3));
+
     const newFlashcard = this.state.flashcards.filter(f => f.correctAnswers < 3)[indeks];
-    console.log("1");
-    console.log(newFlashcard);
     this.setState({
       flashcard: newFlashcard
     });
-    console.log("2");
-
-    console.log(this.state.flashcard);
-
   };
+
+  componentDidMount() {
+    this.getFlashcardsOfCategory();
+  }
 
   render() {
     if (
