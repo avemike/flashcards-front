@@ -14,4 +14,4 @@ const ButtonLanding = (probs) =>{
 	);
 }
 
-export default ButtonLanding
+export default ButtonLanding;

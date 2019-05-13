@@ -2,7 +2,7 @@ import React from 'react'
 
 const Feature = (probs) =>{
 	return (
-		<div className="feature">
+		<div className="feature center">
 			<div className="feature-header">
 				<h2>{probs.title}</h2>
 				<i class={probs.icon}></i>
