@@ -7,6 +7,7 @@ import LoginRegisterPage from './loginRegisterPage/App';
 import RedirectPage from './RedirectPage';
 import ModePage from './chooseModePage/App';
 import LandingPage from './landingPage/App';
+import EditFlashcardPage from './editFlashcardsPage/App';
 
 const App = () => (
     <Router>
@@ -14,6 +15,7 @@ const App = () => (
             <Route path="/" exact component={RedirectPage} />
             <Route path="/home" component={LandingPage} />
             <Route path="/loginRegister" component={LoginRegisterPage} />
+            <Route path="/editFlashcards" component={EditFlashcardPage} />
             <Route path="/mode" component={ModePage} />
         </div>
     </Router>

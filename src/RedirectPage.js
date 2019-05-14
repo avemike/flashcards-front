@@ -8,6 +8,9 @@ class RedirectPage extends Component {
         <h1>Tymczasowa strona przekierowań</h1>
         <ul>
           <li>
+            <Link to="/editFlashcards">editFlashcards</Link>
+          </li>
+          <li>
             <Link to="/loginRegister">Login</Link>
           </li>
           <li>
