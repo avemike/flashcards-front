@@ -27,7 +27,7 @@ const Choice = probs => {
 	return(
 		<div style ={mainStyle}>
 	<TopBar username = "Alek"/>
-			<p style={paragraphStyle}>Witaj, co zamierzasz zorbić?</p>
+			<p style={paragraphStyle}>Witaj, co zamierzasz zrobić?</p>
 			<div style={ChoiceStyle}>
 					<MiniFlashcard>
 						<Link to="/test">
