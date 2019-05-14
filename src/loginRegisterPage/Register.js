@@ -42,6 +42,7 @@ class Register extends Component {
        console.log(response);
        if(response.status === 200){
          console.log("registration successfull");
+         console.log(response)
          var loginscreen=[];
          loginscreen.push(<Login parentContext={this} appContext={self.props.appContext}/>);
          var loginmessage = "Jeszcze niezarejestrowany? Załóż konto!";
