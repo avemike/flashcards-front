@@ -67,11 +67,11 @@ class Login extends Component {
         }
         else if(response.status == 204){
           console.log("Username password do not match");
-          alert(response.data.success)
+          alert("Nieprawidłowe hasło.")
         }
         else{
           console.log("Username does not exists");
-          alert("Username does not exist");
+          alert("Użytkownik nie istnieje.");
         }
       })
       .catch(function (error) {
