@@ -70,15 +70,16 @@ class Login extends Component {
           // self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
         }
         else if(response.status == 204){
-          console.log("Username password do not match");
-          alert(response.data.success)
+          console.log("Username password does not match");
+          alert("Nieprawidłowe hasło.")
         }
         else{
-          console.log("Username does not exists");
-          alert("Username does not exist");
+          console.log("Username does not exist");
+          alert("Użytkownik nie istnieje.");
         }
       })
       .catch(function (error) {
+        alert("Logowanie się nie powiodło.");
         console.log(error);
       });
   }
