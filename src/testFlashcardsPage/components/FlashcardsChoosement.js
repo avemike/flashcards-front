@@ -93,7 +93,7 @@ export default class FlashcardsChoosement extends React.Component {
 
     countTotalFlashcardsNumber = () => {
         if(!this.state.categoryId) return ;
-        const categoryId = this.state.categoryId;
+        // const categoryId = this.state.categoryId;
         return axios
             .get("http://localhost:4000/api/categories/" + this.state.categoryId + "/flashcards", {
                 headers: {
@@ -102,6 +102,7 @@ export default class FlashcardsChoosement extends React.Component {
                     'x-auth-token': localStorage.getItem("userKey")
                 }})
             .then(res => {
+
                 this.setState(
                     {
                         flashcardsNbr: { max: res.data.length }
@@ -109,6 +110,7 @@ export default class FlashcardsChoosement extends React.Component {
                 );
             });
             console.log("maksior " + this.state.flashcardsNbr.max);
+
     };
         // const totalFlashcardsNbr = this.state.categories
         //     .filter((category) => category.isTicked)
