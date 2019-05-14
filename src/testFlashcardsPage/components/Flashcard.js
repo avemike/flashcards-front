@@ -56,7 +56,7 @@ export default class Flashcard extends React.Component {
   };
 
   getFlashcardsOfCategory = () => {
-    const categoryId = this.props.categories[0]._id;
+    const categoryId = this.props.categoryId;
 
     return axios.get(
       "http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
@@ -112,7 +112,8 @@ export default class Flashcard extends React.Component {
       return (
         <div className="card-test">
           <div className="wrap">
-            <p>Kategoria : {this.props.categories[0].name}</p>
+          {/* trzeba wyciągnąć nazwę po id */}
+            <p>Kategoria : {this.props.categoryId}</p> 
             <img src={imgLogo.src} alt={imgLogo.alt} />
           </div>
           <h2>{this.state.flashcard.firstText}</h2>

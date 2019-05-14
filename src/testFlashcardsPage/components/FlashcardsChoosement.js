@@ -9,6 +9,7 @@ export default class FlashcardsChoosement extends React.Component {
        super(props);
         this.state = {
            categories: [],
+           categoryId: '',
            flashcardsNbr: {
                 max: 1,
                 flashcardAmount: 1
@@ -27,6 +28,7 @@ export default class FlashcardsChoosement extends React.Component {
         this.listTickedCategories = this.listTickedCategories.bind(this);
         this.startLearning = this.startLearning.bind(this);
         this.flashcardPassed = this.flashcardPassed.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
         this.getCategories();   
     }
 
@@ -39,10 +41,11 @@ export default class FlashcardsChoosement extends React.Component {
             }
         })
         .then(res => {
-            let innerCategories = res.data.map(category => ({...category, isTicked:false}));
-            innerCategories[0].isTicked = true;
+            console.log(res.data)
+            // let innerCategories = res.data.map(category => ({...category, isTicked:false}));
+            // innerCategories[0].isTicked = true;
             this.setState({
-                categories: innerCategories
+                categories: res.data
             });
             // this.state.categories = innerCategories;
             this.countTotalFlashcardsNumber();
@@ -65,6 +68,11 @@ export default class FlashcardsChoosement extends React.Component {
         
 
     }
+    handleCategoryChange(event) {
+        console.log(event.target.value);
+        this.setState({categoryId: event.target.value})
+    }
+
     flashcardNbrChoose = (e) => {
         const flashcardsSize = this.state.flashcardsNbr.max;
         this.setState({flashcardsNbr: {
@@ -86,8 +94,9 @@ export default class FlashcardsChoosement extends React.Component {
         const selectCategory = this.state.categories.filter((category) => category.isTicked)
         if(!selectCategory[0]) return ;
         const categoryId = selectCategory[0]._id;
+        console.log("cat " + this.state.categoryId)
         return axios
-            .get("http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
+            .get("http://localhost:4000/api/categories/" + this.state.categoryId + "/flashcards", {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -116,6 +125,8 @@ export default class FlashcardsChoosement extends React.Component {
         // console.log(this.state.flashcardsNbr.max);
     // }
 
+ 
+
     listTickedCategories = () => {
         return this.state.categories
             .filter((category) => category.isTicked);
@@ -129,23 +140,32 @@ export default class FlashcardsChoosement extends React.Component {
     componentDidMount = async() => {
         await this.getCategories();
     }
+
+   
+
     render () {
-        const renderedCategories = this.state.categories.map((category, index) =>
-            <label className="inputContainer">
-                {category.name}
-                <input type="checkbox" onChange={this.categoryTicked}
-                    checked={category.isTicked ? 'checked' : null}  data-index={index}/>
-                <span className="checkmark"></span>
-            </label>
-        );
+        // const renderedCategories = this.state.categories.map((category, index) =>
+        //     <label className="inputContainer">
+        //         {category.name}
+        //         <input type="checkbox" onChange={this.categoryTicked}
+        //             checked={category.isTicked ? 'checked' : null}  data-index={index}/>
+        //         <span className="checkmark"></span>
+        //     </label>
+        // );
         if (!this.state.gotoFlashcards)
             return (
                 <div className="test-container">
                     <div className="card">
                         <img src={imgLogo.src} alt={imgLogo.alt} />
-                        <p>Wybierz kategorie:</p>
+                        <p>Wybierz kategorię:</p>
                         <form>
-                            {renderedCategories}
+                        <select onChange={this.handleCategoryChange}>
+                            <option>---</option>
+                        {this.state.categories.map(e => {
+                      return <option value={e._id}>{e.name}</option>;
+                    })}
+                        </select>
+                            {/* {renderedCategories} */}
                         </form>
                         <p>Wybierz liczbę fiszek do nauki</p>
 
@@ -167,6 +187,7 @@ export default class FlashcardsChoosement extends React.Component {
         else return(
             <div className="test-container">
                 <Flashcard
+                    categoryId = {this.state.categoryId}
                     flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
                     categories = {this.listTickedCategories()} //tu
                     flashcardPassed = {this.flashcardPassed}
