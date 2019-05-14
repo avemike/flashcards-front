@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import App from './App.js';
 
-ReactDOM.render( <
-    App / > , document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+
+// document.body.style = 'background:  rgb(221, 250, 221);';
