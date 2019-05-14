@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body {
+.test-container {
     background-color: #2cc26f;
     font-family: 'Lato', sans-serif;
     display: flex;
@@ -10,10 +10,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: -20px 0 50px;
+    /* margin: -20px 0 50px; */
 }
 
-.card {
+.card-test {
     background-color: white;
     color: #01695A;
     font-size: 12px;
@@ -26,10 +26,9 @@ body {
     align-items: center;
     min-width: 620px;
     min-height: 388px;
-    
 }
 
-.card h2{
+.card-test h2{
     font-family: 'Lato', sans-serif;
     color: #04291D;
     font-size: 40px;

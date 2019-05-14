@@ -110,7 +110,7 @@ export default class Flashcard extends React.Component {
     }
     else if (this.state.status === 200) {
       return (
-        <div className="card">
+        <div className="card-test">
           <div className="wrap">
             <p>Kategoria : {this.props.categories[0].name}</p>
             <img src={imgLogo.src} alt={imgLogo.alt} />

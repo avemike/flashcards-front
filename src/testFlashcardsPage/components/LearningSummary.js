@@ -38,7 +38,7 @@ export default class LearningSummary extends React.Component {
     render() {
         if (!this.state.gotoFlashcardsChoosement)
             return(
-                <div className="card">
+                <div className="card-test">
                     <img src={imgLogo.src} alt={imgLogo.alt} />
                     <h2>Twój wynik to:</h2>
                     <p>{this.props.correct} dobrych i {this.props.incorrect} złych odpowiedzi</p>

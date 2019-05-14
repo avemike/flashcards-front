@@ -138,37 +138,41 @@ export default class FlashcardsChoosement extends React.Component {
         );
         if (!this.state.gotoFlashcards)
             return (
-                <div className="card">
-                    <img src={imgLogo.src} alt={imgLogo.alt} />
-                    <p>Wybierz kategorie:</p>
-                    <form>
-                        {renderedCategories}
-                    </form>
-                    <p>Wybierz liczbę fiszek do nauki</p>
+                <div className="test-container">
+                    <div className="card">
+                        <img src={imgLogo.src} alt={imgLogo.alt} />
+                        <p>Wybierz kategorie:</p>
+                        <form>
+                            {renderedCategories}
+                        </form>
+                        <p>Wybierz liczbę fiszek do nauki</p>
 
-                    <div className="slidecontainer">
-                        <input type="range" 
-                            className="slider" 
-                            min="1" 
-                            max={this.state.flashcardsNbr.max}
-                            defaultValue={this.state.flashcardsNbr.flashcardAmount}
-                            onChange={this.flashcardNbrChoose} 
-                        /> {/* tu onchange */}
+                        <div className="slidecontainer">
+                            <input type="range" 
+                                className="slider" 
+                                min="1" 
+                                max={this.state.flashcardsNbr.max}
+                                defaultValue={this.state.flashcardsNbr.flashcardAmount}
+                                onChange={this.flashcardNbrChoose} 
+                            /> {/* tu onchange */}
 
-                    <div>{this.state.flashcardsNbr.flashcardAmount}</div>
+                        <div>{this.state.flashcardsNbr.flashcardAmount}</div>
+                    </div>
+
+                    <button onClick={this.startLearning}>Dalej</button> {/* tu */}
                 </div>
-
-                <button onClick={this.startLearning}>Dalej</button> {/* tu */}
             </div>);
         else return(
-            <Flashcard
-                flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
-                categories = {this.listTickedCategories()} //tu
-                flashcardPassed = {this.flashcardPassed}
-                showSummary = {this.state.showSummary}
-                correct = {this.state.correct}
-                incorrect = {this.state.incorrect}
-            />
+            <div className="test-container">
+                <Flashcard
+                    flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
+                    categories = {this.listTickedCategories()} //tu
+                    flashcardPassed = {this.flashcardPassed}
+                    showSummary = {this.state.showSummary}
+                    correct = {this.state.correct}
+                    incorrect = {this.state.incorrect}
+                />
+            </div>
         );
     }
 }
