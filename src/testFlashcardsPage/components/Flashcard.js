@@ -15,7 +15,8 @@ export default class Flashcard extends React.Component {
     this.state = {
       status: 200,
       flashcards: [],
-      flashcard: {}
+      flashcard: {},
+      category: ''
     };
     this.nextFlashcard = this.nextFlashcard.bind(this);
     this.updateCurrentFlashcard = this.updateCurrentFlashcard.bind(this);
@@ -73,6 +74,13 @@ export default class Flashcard extends React.Component {
       });
   };
 
+  getCategoryName() {
+    const name = this.props.categories
+    .filter(c => c._id === this.props.categoryId)
+    .map(cat => cat.name)[0];
+    this.setState({ category: name});
+  }
+
   getNextFlashcard = async () => {
     // await this.getFlashcardsOfCategory(); TEMP1
     
@@ -91,6 +99,8 @@ export default class Flashcard extends React.Component {
   componentDidMount = async () => {
     await this.getFlashcardsOfCategory();
     await this.getNextFlashcard(); 
+    await this.getCategoryName();
+     
   }
   
   render() {
@@ -113,7 +123,7 @@ export default class Flashcard extends React.Component {
         <div className="card-test">
           <div className="wrap">
           {/* trzeba wyciągnąć nazwę po id */}
-            <p>Kategoria : {this.props.categoryId}</p> 
+            <p>Kategoria : {this.state.category}</p> 
             <img src={imgLogo.src} alt={imgLogo.alt} />
           </div>
           <h2>{this.state.flashcard.firstText}</h2>

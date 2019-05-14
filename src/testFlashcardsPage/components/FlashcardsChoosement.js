@@ -189,7 +189,7 @@ export default class FlashcardsChoosement extends React.Component {
                 <Flashcard
                     categoryId = {this.state.categoryId}
                     flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
-                    categories = {this.listTickedCategories()} //tu
+                    categories = {this.state.categories} //tu
                     flashcardPassed = {this.flashcardPassed}
                     showSummary = {this.state.showSummary}
                     correct = {this.state.correct}
