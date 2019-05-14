@@ -11,30 +11,6 @@ export default class Content extends Component {
             flashcards: [],
             categories: []
         }
-        // this.state = {
-        //     flashcards: [{
-        //         category: 'Jedzenie',
-        //         word: 'Lody',
-        //         translatedWord: 'Ice Cream'
-        //     },
-        //     {
-        //         category: 'Jedzenie',
-        //         word: 'Jabłko',
-        //         translatedWord: 'Apple'
-        //     },
-        //     {
-        //         category: 'Sprzęt',
-        //         word: 'Komputer',
-        //         translatedWord: 'Computer'
-        //     },
-        //     {
-        //         category: 'Motoryzacja',
-        //         word: 'Samochód',
-        //         translatedWord: 'Car'
-        //     }
-        //     ]
-        // }
-
         this.getAllFlashcards();
         this.getAllCategories();
 
@@ -73,17 +49,20 @@ export default class Content extends Component {
         })
     }
 
-    handleDeleteFlashcard(index) {
-        axios.delete("http://localhost:4000/api/flashcards/" + index), {
+    handleDeleteFlashcard(_id, index) {
+        axios.delete("http://localhost:4000/api/flashcards/" + _id), {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'x-auth-token': localStorage.getItem("userKey")
             }
         }
-        // this.setState({
-        //     flashcards: this.state.flashcards.filter((data, i) => i !== index)
-        // })
+
+        // Shift flashcard from state
+        const flashcardsWithoutDeletedOne = this.state.flashcards.filter((data, i) => i !== index); 
+        this.setState({
+            flashcards: flashcardsWithoutDeletedOne
+        }) 
     }
 
     handleAddFlashcard(flashcard) {
@@ -99,7 +78,15 @@ export default class Content extends Component {
             <div className='row'>
                 <AddFlashcard categories={this.state.categories}/>
                 {this.state.flashcards.map((el, i) => {
-                    return <Flashcard categories={this.state.categories} handleEditFlashcard={this.handleEditFlashcard} handleDeleteFlashcard={this.handleDeleteFlashcard} key={i} index={i} flashcard={el} />
+                    return ( 
+                        <Flashcard 
+                            categories={this.state.categories} 
+                            handleEditFlashcard={this.handleEditFlashcard} 
+                            handleDeleteFlashcard={this.handleDeleteFlashcard} 
+                            key={i} 
+                            index={i} 
+                            flashcard={el} />
+                    )
                 })}
                 <AddFlashcardModal  categories={this.state.categories} handleAddFlashcard={this.handleAddFlashcard} />
 

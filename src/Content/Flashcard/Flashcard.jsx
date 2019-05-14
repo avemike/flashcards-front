@@ -33,7 +33,6 @@ export default class Flashcard extends Component {
                 <div className="row ">
                     Kategoria: {this.state.category}
                 </div>
-
                 <div className="row d-flex justify-content-center">
                     {this.props.flashcard.firstText}
                 </div>
@@ -41,7 +40,7 @@ export default class Flashcard extends Component {
                     {this.props.flashcard.secondText}
                 </div>
                 <div className="row d-flex justify-content-center">
-                    <button onClick={() => this.props.handleDeleteFlashcard(this.props.flashcard._id)} className="btn btn-danger justify-content-center">
+                    <button onClick={() => this.props.handleDeleteFlashcard(this.props.flashcard._id, this.props.index)} className="btn btn-danger justify-content-center">
                         Usuń fiszkę</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target={"#deleteFlashcard" + this.props.index}>
                         Edytuj fiszkę
