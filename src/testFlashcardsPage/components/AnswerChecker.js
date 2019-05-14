@@ -22,7 +22,7 @@ export default class AnswerChecker extends React.Component {
   };
 
   isAnswerCorrect = () => {
-    return (
+    if(this.state.answer) return (
       this.state.answer.toLowerCase() ===
       this.props.flashcard.secondText.toLowerCase()
     );
