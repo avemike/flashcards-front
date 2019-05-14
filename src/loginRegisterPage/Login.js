@@ -61,9 +61,11 @@ class Login extends Component {
       .then(function (response) {
         if(response.status == 200){
           console.log("Login successfull");
-          var uploadScreen=[];
-          uploadScreen.push(<UploadPage appContext={self.props.appContext}/>)
-          self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+          localStorage.setItem("userKey", response.data);
+
+          // var uploadScreen=[];
+          // uploadScreen.push(<UploadPage appContext={self.props.appContext}/>)
+          // self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
         }
         else if(response.status == 204){
           console.log("Username password do not match");

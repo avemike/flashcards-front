@@ -2,8 +2,27 @@ import React from 'react';
 import Feature from './Feature';
 import ButtonLanding from './Button';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import history from '../history';
+
 import './index.css';
 const App = () => {
+	{
+		axios.get('http://localhost:4000/api/register/me', {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'x-auth-token': localStorage.getItem("userKey")
+			}
+		})
+		.then(res => {
+			// User is logged in
+		})
+		.catch(err => {
+			// Redirect to home
+			history.push('/loginRegister')
+		})
+	}
 	return (
 		<div className="center">
 			<header>

@@ -22,7 +22,7 @@ export default class Flashcard extends Component {
         .then(res => 
             {
             this.setState({
-            category: res.data[0].name
+                category: res.data[0].name
             })
         })
     }
