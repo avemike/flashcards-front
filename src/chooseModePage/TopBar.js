@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Logout} from '../logout'
 
 const TopBarStyle = {
 	height:"60px",
@@ -19,7 +20,9 @@ const paragraphStyle = {
 	margin: "0 50px",
 	fontSize:"30px"
 }
-
+const logoutStyle ={
+	cursor:"pointer"
+}
 
 // const logOut = () =>{
 // 	alert("Wylogowanie")
@@ -32,11 +35,11 @@ const TopBar= probs => {
 				<p style={paragraphStyle}>{probs.username||"BRAK UŻYTKOWNIKA"}</p>
 				<p 
 					style={paragraphStyle}
-					// onClick={logOut}
+					 onClick={Logout}
 				>
-				<Link to='/home' style={linkStyle}>
-					Wyloguj <i className="fas fa-sign-out-alt"></i>
-				</Link>
+				
+				<div style={logoutStyle}>Wyloguj <i className="fas fa-sign-out-alt"></i></div>	
+				
 				</p>
 		</div>
 	);
