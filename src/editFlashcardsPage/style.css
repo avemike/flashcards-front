@@ -2,14 +2,14 @@
     box-sizing: border-box;
 }
 
-body {
+.screen {
     background-color: #2cc26f;
     font-family: 'Lato', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    margin: 0 0 50px;
+    min-height: 100vh;
+    width: 100vw;
 }
 
 .card {

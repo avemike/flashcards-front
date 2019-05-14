@@ -1,8 +1,8 @@
 import React from 'react';
 import Feature from './Feature';
 import ButtonLanding from './Button';
+import { Link } from 'react-router-dom';
 import './index.css';
-
 const App = () => {
 	return (
 		<div className="center">
@@ -11,10 +11,11 @@ const App = () => {
 				<h1>Z nami nauczysz się wstystkiego!</h1>
 			</header>
     		<div id="promo" class="background">TU WSTAWIĆ ZDJĘCIE GOTOWEJ APKI</div>
-			<ButtonLanding
-				text="Załóż konto!"
-				onClick=""
-			 />
+			<Link to='/loginRegister'> 
+				<ButtonLanding
+					text="Załóż konto!"
+				/>
+			</Link>
 			<Features />
 		</div>
 	);
