@@ -45,8 +45,7 @@ export default class EditFlashcardModal extends Component {
     const categoryId = this.props.categories
       .filter(c => c.name === event.target.value)
       .map(cat => cat._id)[0];
-
-    this.setState({ categoryId: categoryId });
+     this.setState({ categoryId: categoryId });
   }
   handleTranslatedWordChange(event) {
     this.setState({ translatedWord: event.target.value });
@@ -58,8 +57,8 @@ export default class EditFlashcardModal extends Component {
     event.preventDefault();
 
     const editFlashcard = {
-      firstText: this.state.word,
-      secondText: this.state.translatedWord,
+      firstText: this.state.word || this.props.flashcard.firstText,
+      secondText: this.state.translatedWord || this.props.flashcard.secondText,
       correctAnswers: this.props.flashcard.correctAnswers,
       badAnswers: this.props.flashcard.badAnswers
 
@@ -74,6 +73,7 @@ export default class EditFlashcardModal extends Component {
             }
           })
           .then(res => {
+            if(this.state.categoryId){
             this.deleteOldRelation(res.data._id);
             axios.post(
               "http://localhost:4000/api/flashcards/" +
@@ -89,6 +89,7 @@ export default class EditFlashcardModal extends Component {
                 }
               }
             );
+            }
           });
 
   }
