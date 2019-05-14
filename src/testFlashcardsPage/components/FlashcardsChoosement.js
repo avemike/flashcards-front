@@ -70,7 +70,9 @@ export default class FlashcardsChoosement extends React.Component {
     }
     handleCategoryChange(event) {
         console.log(event.target.value);
-        this.setState({categoryId: event.target.value})
+        this.setState({categoryId: event.target.value}, () => {
+            this.countTotalFlashcardsNumber();
+        })
     }
 
     flashcardNbrChoose = (e) => {
@@ -90,11 +92,8 @@ export default class FlashcardsChoosement extends React.Component {
     }
 
     countTotalFlashcardsNumber = () => {
-        if(!this.state.categories) return ;
-        const selectCategory = this.state.categories.filter((category) => category.isTicked)
-        if(!selectCategory[0]) return ;
-        const categoryId = selectCategory[0]._id;
-        console.log("cat " + this.state.categoryId)
+        if(!this.state.categoryId) return ;
+        const categoryId = this.state.categoryId;
         return axios
             .get("http://localhost:4000/api/categories/" + this.state.categoryId + "/flashcards", {
                 headers: {
