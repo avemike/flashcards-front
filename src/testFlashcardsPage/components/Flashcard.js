@@ -100,7 +100,7 @@ export default class Flashcard extends React.Component {
     //   // this.state.flashcards.length === 0
     // )
     //   return <LearningSummary />;
-    if(this.props.showSummary) {
+    if(this.props.showSummary || !this.state.flashcard) {
       return (
         <LearningSummary 
           correct = {this.props.correct}
