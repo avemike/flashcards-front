@@ -42,6 +42,7 @@ class Register extends Component {
        console.log(response);
        if(response.status === 200){
          console.log("registration successfull");
+         alert("Rejestracja przebiegła pomyślnie");
          var loginscreen=[];
          loginscreen.push(<Login parentContext={this} appContext={self.props.appContext}/>);
          var loginmessage = "Jeszcze niezarejestrowany? Załóż konto!";
@@ -53,6 +54,7 @@ class Register extends Component {
        }
        else{
          console.log("some error ocurred",response.status);
+         alert("Przy rejestracji wystąpił błąd");
        }
      })
      .catch(function (error) {
@@ -84,6 +86,7 @@ class Register extends Component {
              hintText="Podaj hasło"
              floatingLabelText="Hasło"
              onChange = {(event,newValue) => this.setState({password:newValue})}
+             minLength="8"
              />
            <br/>
            <RaisedButton label="Zarejestruj" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
