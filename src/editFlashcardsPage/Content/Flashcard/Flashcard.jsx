@@ -19,11 +19,12 @@ export default class Flashcard extends Component {
                 'x-auth-token': localStorage.getItem("userKey")
             }
         })
-        .then(res => 
-            {
-            this.setState({
-                category: res.data[0].name
-            })
+        .then(res => {
+            if(res.data[0]) {
+                this.setState({
+                    category: res.data[0].name || ''
+                })
+            }
         })
     }
     
