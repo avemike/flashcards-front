@@ -1,0 +1,30 @@
+#properValue {
+    font-size: 25px;
+    margin: 0 0 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.properAnswer {
+    border-color: green !important;
+}
+
+.wrongAnswer {
+    border-color: red !important;
+}
+
+#textButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#textButtonContainer textarea {
+    border: 2px solid black;
+    font-size: 20px;
+    padding: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+}

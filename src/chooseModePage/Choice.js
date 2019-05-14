@@ -2,7 +2,7 @@ import React from 'react'
 import MiniFlashcard from './MiniFlashcard'
 import Button from './Button'
 import TopBar from './TopBar'
-
+import { Link } from 'react-router-dom';
 const mainStyle = {
 	backgroundColor: "#2CC26F",
 	height: "100vh",
@@ -29,18 +29,20 @@ const Choice = probs => {
 	<TopBar username = "Alek"/>
 			<p style={paragraphStyle}>Witaj, co zamierzasz zorbić?</p>
 			<div style={ChoiceStyle}>
-				<MiniFlashcard>
-					<Button
-						text="Nauka"
-						onClick="Test"
-					/>
-				</MiniFlashcard>
-				<MiniFlashcard>
-					<Button 
-					text="Edycja" 
-					onClick="Edit"	
-					/>
-				</MiniFlashcard>
+					<MiniFlashcard>
+						<Link to="/test">
+							<Button
+								text="Nauka"
+							/>
+						</Link>
+					</MiniFlashcard>
+					<MiniFlashcard>
+						<Link to="/editFlashcards">
+							<Button 
+								text="Edycja" 
+							/>
+						</Link>
+					</MiniFlashcard>
 			</div>
 		</div>
 

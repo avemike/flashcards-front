@@ -15,19 +15,15 @@ const ButtonLandingStyle = {
 	"boxSizing": "content-box"
 }
 
-const route = destination => {
 
-	alert(`Przeniesienie do ${destination}`)
-}
 
-const ButtonLanding = probs => {
+const ButtonLanding = props => {
 	return (
 		<button 
 			className="button"
 			style={ButtonLandingStyle}
-			onClick={() =>route(probs.onClick)}
 		>
-			{probs.text || "BRAK TEKSTU"}
+			{props.text || "BRAK TEKSTU"}
 		</button>
 	);
 }

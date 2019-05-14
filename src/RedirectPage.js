@@ -18,7 +18,10 @@ class RedirectPage extends Component {
           </li>
           <li>
             <Link to="/home">Home</Link>
-          </li>  
+          </li> 
+          <li>
+            <Link to="/test">Test</Link>
+          </li>
         </ul>
       </div>
     );

@@ -30,7 +30,7 @@ const logoStyle = {
 	
 }
 
-const MiniFlashcard = (probs) => {
+const MiniFlashcard = (props) => {
 
 	return(
 				<div 
@@ -40,8 +40,7 @@ const MiniFlashcard = (probs) => {
 				<div className="Header">
 					<div style={logoStyle}></div>
 				</div>
-			
-					{probs.children}
+					{props.children}
 				</div>
 
 	);

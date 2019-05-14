@@ -3,6 +3,7 @@ import Feature from './Feature';
 import ButtonLanding from './Button';
 import { Link } from 'react-router-dom';
 import './index.css';
+
 const App = () => {
 	return (
 		<div className="center">
