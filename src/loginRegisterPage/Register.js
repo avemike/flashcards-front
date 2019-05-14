@@ -59,6 +59,7 @@ class Register extends Component {
      })
      .catch(function (error) {
        console.log(error);
+       alert("Przy rejestracji wystąpił błąd");
      });
     }
     else{

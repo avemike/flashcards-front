@@ -5,8 +5,24 @@ class RedirectPage extends Component {
   render() {
     return (
       <div>
-         <h1>Tymczasowa strona przekierowań</h1>
-        <Link to="/loginRegister">Login</Link>
+        <h1>Tymczasowa strona przekierowań</h1>
+        <ul>
+          <li>
+            <Link to="/editFlashcards">editFlashcards</Link>
+          </li>
+          <li>
+            <Link to="/loginRegister">Login</Link>
+          </li>
+          <li>
+            <Link to="/mode">Mode</Link>
+          </li>
+          <li>
+            <Link to="/home">Home</Link>
+          </li> 
+          <li>
+            <Link to="/test">Test</Link>
+          </li>
+        </ul>
       </div>
     );
   }

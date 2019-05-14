@@ -1,0 +1,100 @@
+form {
+    font-size: 15px;
+}
+
+.inputContainer {
+    margin: 0 10px 10px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.inputContainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.inputContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.inputContainer input:checked ~ .checkmark {
+  background-color: #2cc26f;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.inputContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.inputContainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*slider*/
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slidecontainer div {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 10px;
+}
