@@ -13,19 +13,25 @@ export default class FlashcardsChoosement extends React.Component {
                 max: 1,
                 flashcardAmount: 1
            },
-           gotoFlashcards: false
+           gotoFlashcards: false,
+           howManyFlashcardsPassed: 0,
+           showSummary: false,
+           correct: 0,
+           incorrect: 0
         };
+
         this.getCategories = this.getCategories.bind(this);
         this.flashcardNbrChoose = this.flashcardNbrChoose.bind(this);
         this.categoryTicked = this.categoryTicked.bind(this);
         this.countTotalFlashcardsNumber = this.countTotalFlashcardsNumber.bind(this);
         this.listTickedCategories = this.listTickedCategories.bind(this);
         this.startLearning = this.startLearning.bind(this);
+        this.flashcardPassed = this.flashcardPassed.bind(this);
         this.getCategories();   
     }
 
     getCategories = () => {
-        axios.get("http://localhost:4000/api/categories", {
+        return axios.get("http://localhost:4000/api/categories", {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -42,7 +48,23 @@ export default class FlashcardsChoosement extends React.Component {
             this.countTotalFlashcardsNumber();
         });
     }
+    flashcardPassed(gotPoint) {  // true -> +1 correct answer, false -> +1 bad answer
+        this.setState({
+            howManyFlashcardsPassed: this.state.howManyFlashcardsPassed + 1
+        }, () => {
+            
+            if(gotPoint) this.setState({correct: this.state.correct + 1})
+            else this.setState({incorrect: this.state.incorrect + 1})
+    
+            if(this.state.howManyFlashcardsPassed == this.state.flashcardsNbr.max) {
+                this.setState({
+                    showSummary: true
+                })
+            }
+        })
+        
 
+    }
     flashcardNbrChoose = (e) => {
         const flashcardsSize = this.state.flashcardsNbr.max;
         this.setState({flashcardsNbr: {
@@ -60,25 +82,24 @@ export default class FlashcardsChoosement extends React.Component {
     }
 
     countTotalFlashcardsNumber = () => {
-           const selectCategory = this.state.categories
-            .filter((category) => category.isTicked)
-            const categoryId = selectCategory[0]._id;
-        
-        axios.get("http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'x-auth-token': localStorage.getItem("userKey")
-            }
-        })
-              .then(res => {
-                this.setState({flashcardsNbr: {
-                            max: res.data.length
-                        }
-                    });
-                });
-                console.log("maksior " + this.state.flashcardsNbr.max);
-          };
+        const selectCategory = this.state.categories.filter((category) => category.isTicked)
+        const categoryId = selectCategory[0]._id;
+        return axios
+            .get("http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'x-auth-token': localStorage.getItem("userKey")
+                }})
+            .then(res => {
+                this.setState(
+                    {
+                        flashcardsNbr: { max: res.data.length }
+                    }
+                );
+            });
+            console.log("maksior " + this.state.flashcardsNbr.max);
+    };
         // const totalFlashcardsNbr = this.state.categories
         //     .filter((category) => category.isTicked)
         //     .map((category) => category.count)
@@ -102,6 +123,10 @@ export default class FlashcardsChoosement extends React.Component {
     startLearning = () => {
         this.setState({gotoFlashcards: true});
     }
+
+    componentDidMount = async() => {
+        await this.getCategories();
+    }
     render () {
         const renderedCategories = this.state.categories.map((category, index) =>
             <label className="inputContainer">
@@ -112,28 +137,38 @@ export default class FlashcardsChoosement extends React.Component {
             </label>
         );
         if (!this.state.gotoFlashcards)
-            return (<div className="card">
-                <img src={imgLogo.src} alt={imgLogo.alt} />
-                <p>Wybierz kategorie:</p>
-                <form>
-                    {renderedCategories}
-                </form>
-                <p>Wybierz liczbę fiszek do nauki</p>
+            return (
+                <div className="card">
+                    <img src={imgLogo.src} alt={imgLogo.alt} />
+                    <p>Wybierz kategorie:</p>
+                    <form>
+                        {renderedCategories}
+                    </form>
+                    <p>Wybierz liczbę fiszek do nauki</p>
 
-                <div className="slidecontainer">
-                  <input type="range" className="slider" min="1" max={this.state.flashcardsNbr.max}
-                    defaultValue={this.state.flashcardsNbr.flashcardAmount}
-                    onChange={this.flashcardNbrChoose}/> {/* tu */}
-                  <div>{this.state.flashcardsNbr.flashcardAmount}</div>
+                    <div className="slidecontainer">
+                        <input type="range" 
+                            className="slider" 
+                            min="1" 
+                            max={this.state.flashcardsNbr.max}
+                            defaultValue={this.state.flashcardsNbr.flashcardAmount}
+                            onChange={this.flashcardNbrChoose} 
+                        /> {/* tu onchange */}
+
+                    <div>{this.state.flashcardsNbr.flashcardAmount}</div>
                 </div>
 
                 <button onClick={this.startLearning}>Dalej</button> {/* tu */}
             </div>);
         else return(
-        <Flashcard
-            flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
-            categories = {this.listTickedCategories()} //tu
-        />
+            <Flashcard
+                flashcardsAmount = {this.state.flashcardsNbr.max} // tu (wczesniej .flashcardsAmount)
+                categories = {this.listTickedCategories()} //tu
+                flashcardPassed = {this.flashcardPassed}
+                showSummary = {this.state.showSummary}
+                correct = {this.state.correct}
+                incorrect = {this.state.incorrect}
+            />
         );
     }
 }

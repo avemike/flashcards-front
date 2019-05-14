@@ -29,11 +29,13 @@ export default class AnswerChecker extends React.Component {
   };
 
   setAnswerCorrect = () => {
+    this.props.flashcardPassed(true); // FlashcardsChoosement howManyFlashcardPassed ++, incorrect ++
     this.props.flashcard.correctAnswers += 1;
     this.setTextFrameStyle("properAnswer");
   };
 
   setAnswerIncorrect = () => {
+    this.props.flashcardPassed(false); // FlashcardsChoosement howManyFlashcardPassed ++, correct ++ 
     this.props.flashcard.badAnswers += 1;
     this.setTextFrameStyle("wrongAnswer");
   };

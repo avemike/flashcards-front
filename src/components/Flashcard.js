@@ -75,36 +75,40 @@ export default class Flashcard extends React.Component {
 
   getNextFlashcard = async () => {
     // await this.getFlashcardsOfCategory(); TEMP1
+    
 
     const amount = this.props.flashcardsAmount;
     let indeks = Math.floor(Math.random() * amount);
-    const newFlashcard = this.state.flashcards.filter(f => { 
-      return f.correctAnswers < 10;
-     }
-    )[indeks];
-    
+    // const newFlashcard = this.state.flashcards.filter(f => { 
+    //   return f.correctAnswers < 10;
+    //  }
+    // )[indeks];
+    const newFlashcard = this.state.flashcards[indeks];
     this.setState({
       flashcard: newFlashcard
     });
   };
-  componentDidMount() {
-    const aaa = async () => {
-      await this.getFlashcardsOfCategory();
-      await this.getNextFlashcard(); 
-      console.log(this.state)
-    }
-    aaa()
-
+  componentDidMount = async () => {
+    await this.getFlashcardsOfCategory();
+    await this.getNextFlashcard(); 
   }
-
+  
   render() {
-    if (
-      this.state.status === 204 ||
-      this.gotFlashcardsNbr === this.props.flashcardsAmount
-      // this.state.flashcards.length === 0
-    )
-      return <LearningSummary />;
-    if (this.state.status === 200)
+    // if (
+    //   this.state.status === 204 ||
+    //   this.gotFlashcardsNbr === this.props.flashcardsAmount
+    //   // this.state.flashcards.length === 0
+    // )
+    //   return <LearningSummary />;
+    if(this.props.showSummary) {
+      return (
+        <LearningSummary 
+          correct = {this.props.correct}
+          incorrect = {this.props.incorrect}
+        />
+      )
+    }
+    else if (this.state.status === 200) {
       return (
         <div className="card">
           <div className="wrap">
@@ -113,11 +117,21 @@ export default class Flashcard extends React.Component {
           </div>
           <h2>{this.state.flashcard.firstText}</h2>
           <AnswerChecker
+            flashcardPassed={this.props.flashcardPassed}
             onChange={this.onTextareaChange}
             flashcard={this.state.flashcard}
           />
           <button onClick={this.nextFlashcard}>Dalej</button>
         </div>
       );
+    }
+    else {
+      return (
+        <LearningSummary 
+          correct = {this.props.correct}
+          incorrect = {this.props.incorrect}
+        />
+      )
+    }
   }
 }
