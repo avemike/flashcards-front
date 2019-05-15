@@ -17,8 +17,7 @@ export default class EditFlashcardModal extends Component {
   handleCategoryChange(event) {
     const categoryId = this.props.categories
       .filter(c => c.name === event.target.value)
-      .map(cat => cat._id);
-
+      .map(cat => cat._id)[0];
     this.setState({ categoryId: categoryId });
   }
   handleTranslatedWordChange(event) {
@@ -35,11 +34,11 @@ export default class EditFlashcardModal extends Component {
       secondText: this.state.translatedWord
     };
     axios
-      .post(`http://localhost:4000/api/flashcards`, newFlashcard,{
+      .post(`http://localhost:4000/api/flashcards`, newFlashcard, {
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'x-auth-token': localStorage.getItem("userKey")
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("userKey")
         }
       })
       .then(res => {
@@ -47,11 +46,13 @@ export default class EditFlashcardModal extends Component {
           "http://localhost:4000/api/flashcards/" +
             res.data._id +
             "/categories/" +
-          this.state.categoryId, {
+            this.state.categoryId,
+          {},
+          {
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'x-auth-token': localStorage.getItem("userKey")
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "x-auth-token": localStorage.getItem("userKey")
             }
           }
         );
@@ -87,6 +88,7 @@ export default class EditFlashcardModal extends Component {
                 <label>
                   Kategoria:
                   <select onChange={this.handleCategoryChange}>
+                    <option>wybierz</option>
                     {this.props.categories.map(e => {
                       return <option>{e.name}</option>;
                     })}

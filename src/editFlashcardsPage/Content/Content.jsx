@@ -50,19 +50,19 @@ export default class Content extends Component {
     }
 
     handleDeleteFlashcard(_id, index) {
-        axios.delete("http://localhost:4000/api/flashcards/" + _id), {
+        axios.delete("http://localhost:4000/api/flashcards/" + _id, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'x-auth-token': localStorage.getItem("userKey")
             }
-        }
+        });
 
         // Shift flashcard from state
         const flashcardsWithoutDeletedOne = this.state.flashcards.filter((data, i) => i !== index); 
         this.setState({
             flashcards: flashcardsWithoutDeletedOne
-        }) 
+        });
     }
 
     handleAddFlashcard(flashcard) {

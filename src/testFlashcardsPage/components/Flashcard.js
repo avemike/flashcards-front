@@ -15,7 +15,8 @@ export default class Flashcard extends React.Component {
     this.state = {
       status: 200,
       flashcards: [],
-      flashcard: {}
+      flashcard: {},
+      category: ''
     };
     this.nextFlashcard = this.nextFlashcard.bind(this);
     this.updateCurrentFlashcard = this.updateCurrentFlashcard.bind(this);
@@ -56,7 +57,7 @@ export default class Flashcard extends React.Component {
   };
 
   getFlashcardsOfCategory = () => {
-    const categoryId = this.props.categories[0]._id;
+    const categoryId = this.props.categoryId;
 
     return axios.get(
       "http://localhost:4000/api/categories/" + categoryId + "/flashcards", {
@@ -72,6 +73,13 @@ export default class Flashcard extends React.Component {
         });
       });
   };
+
+  getCategoryName() {
+    const name = this.props.categories
+    .filter(c => c._id === this.props.categoryId)
+    .map(cat => cat.name)[0];
+    this.setState({ category: name});
+  }
 
   getNextFlashcard = async () => {
     // await this.getFlashcardsOfCategory(); TEMP1
@@ -91,6 +99,8 @@ export default class Flashcard extends React.Component {
   componentDidMount = async () => {
     await this.getFlashcardsOfCategory();
     await this.getNextFlashcard(); 
+    await this.getCategoryName();
+     
   }
   
   render() {
@@ -100,7 +110,7 @@ export default class Flashcard extends React.Component {
     //   // this.state.flashcards.length === 0
     // )
     //   return <LearningSummary />;
-    if(this.props.showSummary) {
+    if(this.props.showSummary || !this.state.flashcard) {
       return (
         <LearningSummary 
           correct = {this.props.correct}
@@ -112,7 +122,8 @@ export default class Flashcard extends React.Component {
       return (
         <div className="card-test">
           <div className="wrap">
-            <p>Kategoria : {this.props.categories[0].name}</p>
+          {/* trzeba wyciągnąć nazwę po id */}
+            <p>Kategoria : {this.state.category}</p> 
             <img src={imgLogo.src} alt={imgLogo.alt} />
           </div>
           <h2>{this.state.flashcard.firstText}</h2>

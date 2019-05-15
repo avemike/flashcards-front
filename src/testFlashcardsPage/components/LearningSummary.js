@@ -12,23 +12,6 @@ export default class LearningSummary extends React.Component {
            badAnswers: 0,
            gotoFlashcardsChoosement: false
        };
-       this.getCorrectAnswer();
-    }
-
-    getCorrectAnswer = () => {
-        axios.get("http://localhost:4000/learning/learningResults", {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'x-auth-token': localStorage.getItem("userKey")
-            }
-        })
-        .then(res => {
-            this.setState({
-                correctAnswer: res.data.correctAnswer,
-                badAnswers: res.data.badAnswers
-            });
-        });
     }
 
     jumpToFlashcardsChoosement = () => {

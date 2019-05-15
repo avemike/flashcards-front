@@ -10,7 +10,8 @@ const logoStyle = {
 	backgroundImage: `url(${imgLogo.src})`,
 	backgroundSize: "contain",
 	backgroundRepeat: "no-repeat",
-	backgroundPosition:"left center"
+	backgroundPosition:"left center",
+	filter: "invert(100%)"
 }
 const HompageButton = () =>{
 	return (<div style={logoStyle} ></div>);

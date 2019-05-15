@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import UploadPage from './UploadPage';
+import history from '../history';
 var apiBaseUrl = "http://localhost:4000/api/";
 //uploadpage to strona, do której prowadzi udane logowanie, na razie pusta
 
@@ -62,23 +63,24 @@ class Login extends Component {
         if(response.status == 200){
           console.log("Login successfull");
 
-          localStorage.setItem("userKey", response.data);
           localStorage.setItem("email", payload.email);
-
+          localStorage.setItem("userKey", response.data);
+          history.push('/mode');
           // var uploadScreen=[];
           // uploadScreen.push(<UploadPage appContext={self.props.appContext}/>)
           // self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
         }
         else if(response.status == 204){
-          console.log("Username password do not match");
-          alert(response.data.success)
+          console.log("Username password does not match");
+          alert("Nieprawidłowe hasło.")
         }
         else{
-          console.log("Username does not exists");
-          alert("Username does not exist");
+          console.log("Username does not exist");
+          alert("Użytkownik nie istnieje.");
         }
       })
       .catch(function (error) {
+        alert("Logowanie się nie powiodło.");
         console.log(error);
       });
   }
