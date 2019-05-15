@@ -3,11 +3,13 @@ import { Logout } from '../logout';
 
 const logoutStyle ={
 	cursor:"pointer",
-	fontSize:"20px",
 	display:"flex",
 	justifyContent: "center",
 	alignItems: "center",	
 	margin:"10px"
+}
+const logoutIconStyle ={
+	margin: " 0 10px"
 }
 
 const LogoutButton = () =>{
@@ -17,7 +19,7 @@ const LogoutButton = () =>{
 	onClick={Logout}
 	>
 	Wyloguj 
-	<i className="fas fa-sign-out-alt"></i>
+	<i style = {logoutIconStyle} className="fas fa-sign-out-alt"></i>
 	</div>	
 	);
 		

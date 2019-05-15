@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Logout} from '../logout'
+
 
 
 const TopBarStyle = {
@@ -11,21 +10,11 @@ const TopBarStyle = {
 	margin:" 0 0 30px 0 ",
 	padding:"0",
 	display:"flex",
-	justifyContent: "space-between"
+	justifyContent: "space-between",
+	fontSize: "20px",
+	fontWeight:"bold",
+	color:"#E8F4F0"
 }
-const linkStyle = {
-	color: "white",
-	"text-decoration": "none"
-}
-const paragraphStyle = {
-	margin: "0 50px",
-	fontSize:"30px"
-}
-
-
-// const logOut = () =>{
-// 	alert("Wylogowanie")
-// }
 
 const TopBar= probs => {
 	return (

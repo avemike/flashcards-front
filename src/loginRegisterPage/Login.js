@@ -61,7 +61,9 @@ class Login extends Component {
       .then(function (response) {
         if(response.status == 200){
           console.log("Login successfull");
+
           localStorage.setItem("userKey", response.data);
+          localStorage.setItem("email", payload.email);
 
           // var uploadScreen=[];
           // uploadScreen.push(<UploadPage appContext={self.props.appContext}/>)

@@ -1,11 +1,7 @@
 import React from 'react';
-import FlashcardsChoosement from './FlashcardsChoosement';
+import Choice from './Choice'
 import axios from 'axios';
-import HompageButton from "../../topBar/HompageButton"
-import LogoutButton from "../../topBar/LogoutButton"
-import ShowUser from "../../topBar/ShowUser"
-import history from '../../history';
-import TopBar from '../../topBar/TopBar';
+import history from '../history';
 
 export default class App extends React.Component {
     constructor() {
@@ -30,15 +26,6 @@ export default class App extends React.Component {
         })
     }
     render() {
-        return(
-            <div>
-                <TopBar>
-                    <HompageButton />
-                    <ShowUser />
-                    <LogoutButton />
-                </TopBar>
-                this.state.authorized ? <div> <FlashcardsChoosement /></div>:<div></div>
-            </div>
-        ) 
+        return this.state.authorized ? <Choice /> : <div></div>
     }
 }
