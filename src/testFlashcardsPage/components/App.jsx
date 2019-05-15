@@ -30,15 +30,22 @@ export default class App extends React.Component {
         })
     }
     render() {
-        return(
-            <div>
-                <TopBar>
-                    <HompageButton />
-                    <ShowUser />
-                    <LogoutButton />
-                </TopBar>
-                this.state.authorized ? <div> <FlashcardsChoosement /></div>:<div></div>
-            </div>
-        ) 
+        if (this.state.authorized){
+            return (
+                <div>
+                    <TopBar>
+                        <HompageButton />
+                        <ShowUser />
+                        <LogoutButton />
+                    </TopBar>
+
+                    <div> <FlashcardsChoosement /></div>
+                </div>
+            ) 
+        }
+        else{
+            return <div></div>
+        }
+   
     }
 }
