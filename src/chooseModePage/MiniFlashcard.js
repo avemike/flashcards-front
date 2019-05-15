@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const imgLogo = {
+export const imgLogo = {
 	src: process.env.PUBLIC_URL + '/img/icon-left-font-monochrome-black.png',
 	alt: 'logo'
 };
@@ -15,20 +15,10 @@ const MiniFlashcardStyle = {
 	justifyContent: "space-around",
 	alignItems: "center",
 	backgroundColor: "#fff",
-	overflow: "hidden"
-
-
+	fontWeight:"bold"
 }
 
-const logoStyle = {
-	width:"200px",
-	height:"200px",
 
-	backgroundImage: `url(${imgLogo.src})`,
-	backgroundSize:"contain",
-	backgroundRepeat:"no-repeat",
-	
-}
 
 const MiniFlashcard = (props) => {
 
@@ -37,10 +27,8 @@ const MiniFlashcard = (props) => {
 					className="mini-card"
 					style = {MiniFlashcardStyle}
 				>
-				<div className="Header">
-					<div style={logoStyle}></div>
-				</div>
-					{props.children}
+			
+			{props.children}
 				</div>
 
 	);

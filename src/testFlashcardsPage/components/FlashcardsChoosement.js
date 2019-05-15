@@ -156,7 +156,7 @@ export default class FlashcardsChoosement extends React.Component {
         if (!this.state.gotoFlashcards)
             return (
                 <div className="test-container">
-                    <div className="card">
+                    <div className="card-test">
                         <img src={imgLogo.src} alt={imgLogo.alt} />
                         <p>Wybierz kategorię:</p>
                         <form>

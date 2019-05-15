@@ -1,16 +1,17 @@
 import React from 'react'
 import MiniFlashcard from './MiniFlashcard'
-import Button from './Button'
-import TopBar from './TopBar'
+import TopBar from '../topBar/TopBar'
 import { Link } from 'react-router-dom';
+import LogoutButton from "../topBar/LogoutButton"
+import HompageButton from "../topBar/HompageButton"
+import ShowUser from '../topBar/ShowUser';
 const mainStyle = {
 	backgroundColor: "#2CC26F",
 	height: "100vh",
 	textAlign: "center",
 	fontFamily: "Lato",
 	color: "#fff",
-	fontWeight: "lighter",
-	fontSize: "60px",
+
 	margin: "0",
 	padding: "0"
 }
@@ -20,27 +21,41 @@ const ChoiceStyle = {
 	alignItems: "center"	
 }
 const paragraphStyle = {
-	margin: "50px 0"
+	marginTop: "80px",
+	fontWeight: "lighter",
+	fontSize: "60px",
+}
+
+const linkStyle = {
+
+	color: "#04291D",
+	fontSize:"80px"
 }
 
 const Choice = probs => {
 	return(
 		<div style ={mainStyle}>
-	<TopBar username = "Alek"/>
-			<p style={paragraphStyle}>Witaj, co zamierzasz zrobić?</p>
+				<TopBar>
+				
+				<Link to="/home" >
+					<HompageButton />
+				</Link>
+				
+				<ShowUser />
+				<LogoutButton />
+
+				</TopBar>
+			<p style={paragraphStyle}>Witaj, co chcesz zrobić? </p>
 			<div style={ChoiceStyle}>
+			
+				<Link to="/test" style={linkStyle}>
 					<MiniFlashcard>
-						<Link to="/test">
-							<Button
-								text="Nauka"
-							/>
-						</Link>
+						Nauka
 					</MiniFlashcard>
+				</Link>
 					<MiniFlashcard>
-						<Link to="/editFlashcards">
-							<Button 
-								text="Edycja" 
-							/>
+					<Link to="/editFlashcards" style={linkStyle}>
+						Edycja
 						</Link>
 					</MiniFlashcard>
 			</div>

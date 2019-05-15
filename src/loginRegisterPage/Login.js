@@ -62,7 +62,8 @@ class Login extends Component {
       .then(function (response) {
         if(response.status == 200){
           console.log("Login successfull");
-  
+
+          localStorage.setItem("email", payload.email);
           localStorage.setItem("userKey", response.data);
           history.push('/mode');
           // var uploadScreen=[];
