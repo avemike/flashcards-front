@@ -1,20 +1,19 @@
 import React from 'react'
-import {imgLogo} from './MiniFlashcard'
+import {imgLogo} from '../chooseModePage/MiniFlashcard'
 
 
 const logoStyle = {
 
-
-	margin:"0 0 0 40px",
+	margin:"0 40px",
 	height: "50px",
-	width: "100%",
+	width: "175px", //height * 3,5
 	backgroundImage: `url(${imgLogo.src})`,
 	backgroundSize: "contain",
 	backgroundRepeat: "no-repeat",
-	backgroundPosition:" 0 center"
+	backgroundPosition:"left center"
 }
 const HompageButton = () =>{
-	return (<div style={logoStyle} onClick></div>);
+	return (<div style={logoStyle} ></div>);
 }
 
 export default HompageButton

@@ -15,8 +15,7 @@ const MiniFlashcardStyle = {
 	justifyContent: "space-around",
 	alignItems: "center",
 	backgroundColor: "#fff",
-	overflow: "hidden",
-	color: "#04291D"
+	fontWeight:"bold"
 }
 
 
@@ -29,7 +28,7 @@ const MiniFlashcard = (props) => {
 					style = {MiniFlashcardStyle}
 				>
 			
-			<p style={{color:"red"	}}>{props.children}</p>
+			{props.children}
 				</div>
 
 	);

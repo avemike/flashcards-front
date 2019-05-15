@@ -1,18 +1,17 @@
 import React from 'react'
 import MiniFlashcard from './MiniFlashcard'
-import Button from './Button'
-import TopBar from './TopBar'
+import TopBar from '../topBar/TopBar'
 import { Link } from 'react-router-dom';
-import LogoutButton from "./LogoutButton"
-import HompageButton from "./HompageButton"
+import LogoutButton from "../topBar/LogoutButton"
+import HompageButton from "../topBar/HompageButton"
+import ShowUser from '../topBar/ShowUser';
 const mainStyle = {
 	backgroundColor: "#2CC26F",
 	height: "100vh",
 	textAlign: "center",
 	fontFamily: "Lato",
 	color: "#fff",
-	fontWeight: "lighter",
-	fontSize: "60px",
+
 	margin: "0",
 	padding: "0"
 }
@@ -22,7 +21,9 @@ const ChoiceStyle = {
 	alignItems: "center"	
 }
 const paragraphStyle = {
-	margin: "50px 0"
+
+	fontWeight: "lighter",
+	fontSize: "60px",
 }
 
 const linkStyle = {
@@ -35,18 +36,23 @@ const Choice = probs => {
 	return(
 		<div style ={mainStyle}>
 				<TopBar>
-
 				
-				<HompageButton />
+				<Link to="/home" >
+					<HompageButton />
+				</Link>
+				
+				<ShowUser />
 				<LogoutButton />
 
 				</TopBar>
+			<p style={paragraphStyle}>Witaj, co chcesz zrobić? </p>
 			<div style={ChoiceStyle}>
+			
+				<Link to="/test" style={linkStyle}>
 					<MiniFlashcard>
-						<Link to="/test" style={linkStyle}>
 						Nauka
-						</Link>
 					</MiniFlashcard>
+				</Link>
 					<MiniFlashcard>
 					<Link to="/editFlashcards" style={linkStyle}>
 						Edycja
