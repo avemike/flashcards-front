@@ -11,7 +11,8 @@ const App = () => {
 				<div id="logo" class="background"></div>
 				<h1>Z nami nauczysz się wstystkiego!</h1>
 			</header>
-    		<div id="promo" class="background">TU WSTAWIĆ ZDJĘCIE GOTOWEJ APKI</div>
+    		<div id="promo" class="background">
+			</div>
 			<Link to='/loginRegister'> 
 				<ButtonLanding
 					text="Załóż konto!"
