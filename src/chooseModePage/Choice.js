@@ -21,7 +21,7 @@ const ChoiceStyle = {
 	alignItems: "center"	
 }
 const paragraphStyle = {
-
+	marginTop: "80px",
 	fontWeight: "lighter",
 	fontSize: "60px",
 }

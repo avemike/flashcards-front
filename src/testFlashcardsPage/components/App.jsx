@@ -6,6 +6,7 @@ import LogoutButton from "../../topBar/LogoutButton"
 import ShowUser from "../../topBar/ShowUser"
 import history from '../../history';
 import TopBar from '../../topBar/TopBar';
+import { Link } from 'react-router-dom';
 
 export default class App extends React.Component {
     constructor() {
@@ -33,7 +34,9 @@ export default class App extends React.Component {
         return this.state.authorized ? (
             <div> 
                 <TopBar>
-                    <HompageButton />
+                    <Link to='/mode'>
+                        <HompageButton />
+                    </Link>
                     <ShowUser />
                     <LogoutButton />
                 </TopBar>
